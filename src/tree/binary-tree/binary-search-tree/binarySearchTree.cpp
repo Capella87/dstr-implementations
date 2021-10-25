@@ -3,12 +3,12 @@
 #include <queue>
 using namespace std;
 
-bool isRoot(const Node* t)
+bool isRoot(const Node* t) // 루트인 경우 true를 반환
 {
     return !t->parent ? true : false;
 }
 
-Node* getNode(const Data d)
+Node* getNode(const Data d) // 노드 생성
 {
     Node* newNode = new Node;
     newNode->d = d;
@@ -16,7 +16,7 @@ Node* getNode(const Data d)
     return newNode;
 }
 
-Node* insert(Node* root, Node* parent, const Data d)
+Node* insert(Node* root, Node* parent, const Data d) // 위치를 찾아 트리에 대입
 {
     if (!root) // 해당 위치를 찾은 경우
     {
@@ -29,7 +29,7 @@ Node* insert(Node* root, Node* parent, const Data d)
     return root;
 }
 
-int height(Node* root)
+int height(Node* root) // 트리 높이
 {
     if (!root->left && !root->right) return 0;
     else if (root->left && !root->right) return 1 + height(root->left);
@@ -37,20 +37,20 @@ int height(Node* root)
     else return 1 + MAX(height(root->left), height(root->right));
 }
 
-int depth(Node* t)
+int depth(Node* t) // 루트로부터 특정 노드 간의 거리인 '높이'
 {
     return isRoot(t) ? 0 : 1 + depth(t->parent);
 }
 
-Node* minValueNode(Node* t)
+Node* minValueNode(Node* t) // 삭제 대상 노드 자식들 중 가장 작은 노드를 찾는다.
 {
     Node* cur = t;
-    while (cur && cur->left) // !
+    while (cur && cur->left)
         cur = cur->left;
     return cur;
 }
 
-Node* detree(Node* root, const Data t)
+Node* detree(Node* root, const Data t) // 대상을 찾아 트리에서 삭제
 {
     if (!root) return root;
 
@@ -80,7 +80,7 @@ Node* detree(Node* root, const Data t)
     return root;
 }
 
-void inOrderTraverse(Node* t)
+void inOrderTraverse(Node* t) // 중위 순회
 {
     if (!t) return;
     if (t->left) inOrderTraverse(t->left);
@@ -89,7 +89,7 @@ void inOrderTraverse(Node* t)
     return;
 }
 
-void levelOrderTraverse(Node* t)
+void levelOrderTraverse(Node* t) // 레벨 순회 (루트부터 뿌리순으로 순회)
 {
     queue<Node*> q;
     q.push(t);
@@ -105,7 +105,7 @@ void levelOrderTraverse(Node* t)
     return;
 }
 
-Node* search(Node* root, const Data t)
+Node* search(Node* root, const Data t) // 대상을 찾는다. 없는 경우 NULL을 반환
 {
     if (!root) return root;
 
@@ -114,7 +114,7 @@ Node* search(Node* root, const Data t)
     return root;
 }
 
-void removeAll(Node* root)
+void removeAll(Node* root) // 종료 전 모든 노드 공간 반환
 {
     if (!root) return;
 
