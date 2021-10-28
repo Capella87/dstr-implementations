@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "./_common_/common.h"
 
 void mergeSort(int* arr, int* buffer, int left, int right)
 {
@@ -26,13 +27,6 @@ void mergeSort(int* arr, int* buffer, int left, int right)
     for (int l = left; l <= right; l++)
         arr[l] = buffer[l];
     return;
-}
-
-void print_array(int* arr, const int size)
-{
-    for (int i = 0; i < size; i++)
-        printf("%d ", arr[i]);
-    putchar('\n');
 }
 
 int main(void)
