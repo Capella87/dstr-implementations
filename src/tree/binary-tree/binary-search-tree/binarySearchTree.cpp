@@ -75,7 +75,7 @@ Node* detree(Node* root, const Data t) // 대상을 찾아 트리에서 삭제
         // 둘 다 있는 경우
         Node* temp = minValueNode(root->right);
         root->d = temp->d;
-        root->right = detree(root->right, t);
+        root->right = detree(root->right, temp->d);
     }
     return root;
 }
