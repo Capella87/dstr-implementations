@@ -27,7 +27,7 @@ bool enqueue(Heap* h, const Data d)
     while (idx != 1 && d > h->arr[idx / 2]) // 루트 노드 전까지 혹은 더 큰 값이 위에 있는 경우 전까지 루프
     {
         h->arr[idx] = h->arr[idx / 2]; // 값 이동 -> 공간 확보
-        idx = idx / 2;
+        idx /= 2;
     }
     h->arr[idx] = d;
     return true;
