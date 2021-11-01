@@ -27,7 +27,7 @@ private:
         {
             while (low <= right && pivot > vt[low])
                 low++;
-            while (pivot < vt[high] && high > left)
+            while (high > left && pivot < vt[high])
                 high--;
             if (low <= high) swap(low, high);
         }

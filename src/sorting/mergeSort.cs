@@ -52,6 +52,7 @@ namespace sort
             for (var i = 0; i < this.arrSize; i++)
                 targetArr[i] = Convert.ToInt32(input[i]);
         }
+        
         public static void Main() // Driver code
         {
             MSort t = new MSort();
