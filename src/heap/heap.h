@@ -18,4 +18,7 @@ Data dequeue(Heap* h);
 void levelOrder(Heap* h);
 bool freeAll(Heap* h);
 
+bool enqueue_min(Heap* h, const Data d);
+Data dequeue_max(Heap* h);
+
 #endif
