@@ -1,38 +1,38 @@
 using System;
 
-namespace exchange
+namespace ESort
 {
     public class ESort
     {
-        private int[] NumArr;
-        private int ArrSize;
+        private int[] _numArr;
+        private int _arrSize;
 
         private void Swap(int idx1, int idx2)
         {
-            int temp = NumArr[idx1];
-            NumArr[idx1] = NumArr[idx2];
-            NumArr[idx2] = temp;
+            int temp = _numArr[idx1];
+            _numArr[idx1] = _numArr[idx2];
+            _numArr[idx2] = temp;
         }
 
         public ESort()
         {
             string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            ArrSize = input.Length;
-            NumArr = new int[ArrSize];
-            for (int i = 0; i < ArrSize; i++)
-                NumArr[i] = int.Parse(input[i]);
+            _arrSize = input.Length;
+            _numArr = new int[_arrSize];
+            for (int i = 0; i < _arrSize; i++)
+                _numArr[i] = int.Parse(input[i]);
         }
 
         public void ExchangeSort()
         {
-            for (int i = 0; i < ArrSize - 1; i++)
-                for (int j = i + 1; j < ArrSize; j++)
-                    if (NumArr[i] > NumArr[j]) Swap(i, j);
+            for (int i = 0; i < _arrSize - 1; i++)
+                for (int j = i + 1; j < _arrSize; j++)
+                    if (_numArr[i] > _numArr[j]) Swap(i, j);
         }
 
         public void PrintArray()
         {
-            foreach (int i in NumArr)
+            foreach (int i in _numArr)
                 Console.Write($"{i} ");
             Console.WriteLine();
         }
@@ -42,6 +42,7 @@ namespace exchange
     {
         public static void Main()
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             ESort e = new();
             e.PrintArray();
             e.ExchangeSort();

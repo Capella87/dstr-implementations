@@ -1,39 +1,39 @@
 using System;
 
-namespace shell
+namespace Shell
 {
-    public class Sort
+    public class Shell
     {
-        private int[] numArr;
-        private int arrSize;
+        private int[] _numArr;
+        private int _arrSize;
 
-        public Sort()
+        public Shell()
         {
             string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            arrSize = input.Length;
-            numArr = new int[arrSize];
-            for (int i = 0; i < numArr.Length; i++)
-                numArr[i] = int.Parse(input[i]);
+            _arrSize = input.Length;
+            _numArr = new int[_arrSize];
+            for (int i = 0; i < _numArr.Length; i++)
+                _numArr[i] = int.Parse(input[i]);
         }
 
         public void ShellSort()
         {
-            for (int interval = arrSize / 2; interval > 0; interval /= 2)
+            for (int interval = _arrSize / 2; interval > 0; interval /= 2)
             {
-                for (int i = interval; i < arrSize; i++)
+                for (int i = interval; i < _arrSize; i++)
                 {
-                    int temp = numArr[i];
+                    int temp = _numArr[i];
                     int j;
-                    for (j = i; j >= interval && numArr[j - interval] > temp; j -= interval)
-                        numArr[j] = numArr[j - interval];
-                    numArr[j] = temp;
+                    for (j = i; j >= interval && _numArr[j - interval] > temp; j -= interval)
+                        _numArr[j] = _numArr[j - interval];
+                    _numArr[j] = temp;
                 }
             }
         }
 
         public void PrintArray()
         {
-            foreach (int i in numArr)
+            foreach (int i in _numArr)
                 Console.Write($"{i} ");
             Console.WriteLine();
         }
@@ -44,7 +44,7 @@ namespace shell
         static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Sort n = new();
+            Shell n = new();
             n.PrintArray();
             n.ShellSort();
             n.PrintArray();

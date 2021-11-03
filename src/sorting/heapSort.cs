@@ -1,42 +1,42 @@
 using System;
 
-namespace heap
+namespace HSort
 {
     public class HSort
     {
-        private int[] numArr;
-        private int arrSize;
+        private int[] _numArr;
+        private int _arrSize;
         
         public HSort()
         {
             string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            arrSize = input.Length;
-            numArr = new int[arrSize];
-            for (int i = 0; i < arrSize; i++)
-                numArr[i] = Convert.ToInt32(input[i]);
+            _arrSize = input.Length;
+            _numArr = new int[_arrSize];
+            for (int i = 0; i < _arrSize; i++)
+                _numArr[i] = Convert.ToInt32(input[i]);
         }
 
         private void Swap(int dest, int src)
         {
-            int temp = numArr[dest];
-            numArr[dest] = numArr[src];
-            numArr[src] = temp;
+            int temp = _numArr[dest];
+            _numArr[dest] = _numArr[src];
+            _numArr[src] = temp;
         }
 
-        private void Heapify(int size, int t_idx)
+        private void Heapify(int size, int tIdx)
         {
-            int largest = t_idx;
-            int left = t_idx * 2 + 1;
-            int right = t_idx * 2 + 2;
+            int largest = tIdx;
+            int left = tIdx * 2 + 1;
+            int right = tIdx * 2 + 2;
 
-            if (left < size && numArr[left] > numArr[largest])
+            if (left < size && _numArr[left] > _numArr[largest])
                 largest = left;
-            if (right < size && numArr[right] > numArr[largest])
+            if (right < size && _numArr[right] > _numArr[largest])
                 largest = right;
-            if (t_idx != largest)
+            if (tIdx != largest)
             {
-                Swap(t_idx, largest);
+                Swap(tIdx, largest);
                 Heapify(size, largest);
             }
             return;
@@ -44,9 +44,9 @@ namespace heap
 
         public void HeapSort()
         {
-            for (int i = arrSize / 2 - 1; i >= 0; i--)
-                Heapify(arrSize, i);
-            for (int i = arrSize - 1; i >= 0; i--)
+            for (int i = _arrSize / 2 - 1; i >= 0; i--)
+                Heapify(_arrSize, i);
+            for (int i = _arrSize - 1; i >= 0; i--)
             {
                 Swap(0, i);
                 Heapify(i, 0);
@@ -55,7 +55,7 @@ namespace heap
 
         public void PrintArray()
         {
-            foreach (int i in numArr)
+            foreach (int i in _numArr)
                 Console.Write($"{i} ");
             Console.WriteLine();
         }
