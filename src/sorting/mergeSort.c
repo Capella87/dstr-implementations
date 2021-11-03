@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include "./_common_/common.h"
 
-void mergeSort(int* arr, int* buffer, int left, int right)
+void merge_sort(int* arr, int* buffer, int left, int right)
 {
     if (left >= right) return;
 
     int mid = (left + right) / 2;
 
     // Divide
-    mergeSort(arr, buffer, left, mid);
-    mergeSort(arr, buffer, mid + 1, right);
+    merge_sort(arr, buffer, left, mid);
+    merge_sort(arr, buffer, mid + 1, right);
 
     // Conquer
     int i = left, j = mid + 1, k = left;
@@ -39,11 +39,8 @@ int main(void)
 
     for (int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
-
-    printf("Before: ");
     print_array(arr, n);
-    mergeSort(arr, buf, 0, n - 1);
-    printf("After  : ");
+    merge_sort(arr, buf, 0, n - 1);
     print_array(arr, n);
 
     free(arr);
@@ -57,6 +54,6 @@ input:
 5 4 3 2 1
 
 output:
-Before : 5 4 3 2 1
-After  : 1 2 3 4 5
+5 4 3 2 1
+1 2 3 4 5
 */

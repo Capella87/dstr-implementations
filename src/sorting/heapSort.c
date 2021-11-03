@@ -20,7 +20,7 @@ void heapify(int* arr, int size, int t_idx)
     return;
 }
 
-void heapSort(int* arr, const int size)
+void heap_sort(int* arr, const int size)
 {
     for (int i = size / 2 - 1; i >= 0; i--) // 가장 나중에 있는 internal node부터 루트 노드까지 차례차례 heapify한다.
         heapify(arr, size, i);
@@ -41,10 +41,20 @@ int main(void)
     int* arr = (int*)malloc(sizeof(int) * n);
     for (int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
-    printArray(arr, n);
-    heapSort(arr, n);
-    printArray(arr, n);
+    print_array(arr, n);
+    heap_sort(arr, n);
+    print_array(arr, n);
 
     free(arr);
     return 0;
 }
+
+/*
+input:
+5
+5 4 3 2 1
+
+output:
+5 4 3 2 1
+1 2 3 4 5
+*/

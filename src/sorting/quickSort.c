@@ -20,12 +20,12 @@ int partition(int* arr, int left, int right)
     return high;
 }
 
-void quickSort(int* arr, int left, int right)
+void quick_sort(int* arr, int left, int right)
 {
     if (left > right) return;
     int pivot_idx = partition(arr, left, right);
-    quickSort(arr, left, pivot_idx - 1);
-    quickSort(arr, pivot_idx + 1, right);
+    quick_sort(arr, left, pivot_idx - 1);
+    quick_sort(arr, pivot_idx + 1, right);
     return;
 }
 
@@ -37,10 +37,20 @@ int main(void)
     int* arr = (int*)malloc(sizeof(int) * n);
     for (int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
-    printArray(arr, n);
-    quickSort(arr, 0, n - 1);
-    printArray(arr, n);
+    print_array(arr, n);
+    quick_sort(arr, 0, n - 1);
+    print_array(arr, n);
 
     free(arr);
     return 0;
 }
+
+/*
+input:
+5
+5 4 3 2 1
+
+output:
+5 4 3 2 1
+1 2 3 4 5
+*/

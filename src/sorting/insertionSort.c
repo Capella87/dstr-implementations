@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "./_common_/common.h"
 
-void insertionSort(int* arr, const int size)
+void insertion_sort(int* arr, const int size)
 {
     for (int i = 1; i < size; i++)
     {
@@ -27,8 +27,19 @@ int main(void)
     for (int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
     print_array(arr, n);
-    insertionSort(arr, n);
+    insertion_sort(arr, n);
     print_array(arr, n);
+
     free(arr);
     return 0;
 }
+
+/*
+input:
+5
+5 4 3 2 1
+
+output:
+5 4 3 2 1
+1 2 3 4 5
+*/
