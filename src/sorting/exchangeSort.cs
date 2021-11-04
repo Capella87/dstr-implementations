@@ -7,11 +7,11 @@ namespace ESort
         private int[] _numArr;
         private int _arrSize;
 
-        private void Swap(int idx1, int idx2)
+        private void Swap(ref int a, ref int b)
         {
-            int temp = _numArr[idx1];
-            _numArr[idx1] = _numArr[idx2];
-            _numArr[idx2] = temp;
+            int temp = a;
+            a = b;
+            b = temp;
         }
 
         public ESort()
@@ -27,7 +27,7 @@ namespace ESort
         {
             for (int i = 0; i < _arrSize - 1; i++)
                 for (int j = i + 1; j < _arrSize; j++)
-                    if (_numArr[i] > _numArr[j]) Swap(i, j);
+                    if (_numArr[i] > _numArr[j]) Swap(ref _numArr[i], ref _numArr[j]);
         }
 
         public void PrintArray()
@@ -50,3 +50,12 @@ namespace ESort
         }
     }
 }
+
+/*
+Input:
+5 4 3 2 1
+
+Output:
+5 4 3 2 1
+1 2 3 4 5
+*/
