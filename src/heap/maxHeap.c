@@ -12,7 +12,7 @@ inline void swap(Data* a, Data* b)
     *b = temp;
 }
 
-bool initHeap(Heap* h, const int max)
+bool init_heap(Heap* h, const int max)
 {
     h->arr = (Data*)malloc(sizeof(Data*) * (max + 1));
     h->count = 0;
@@ -53,14 +53,14 @@ Data dequeue(Heap* h)
     return rt;
 }
 
-void levelOrder(Heap* h)
+void level_order(Heap* h)
 {
     for (int i = 1; i <= h->count; i++)
         printf("%d ", h->arr[i]);
     putchar('\n');
 }
 
-bool freeAll(Heap* h)
+bool free_all(Heap* h)
 {
     free(h->arr);
     h->count = h->max = 0;

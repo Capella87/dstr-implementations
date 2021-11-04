@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int binarySearchRecursive(int* arr, int left, int right, const int target)
+int binary_search_recur(int* arr, int left, int right, const int target)
 {
     if (left >= right) return -1;
 
     int mid = (left + right) / 2;
     if (arr[mid] == target) return mid;
-    else if (target < arr[mid]) return binarySearchRecursive(arr, left, mid - 1, target);
-    else return binarySearchRecursive(arr, mid + 1, right, target);
+    else if (target < arr[mid]) return binary_search_recur(arr, left, mid - 1, target);
+    else return binary_search_recur(arr, mid + 1, right, target);
 }
 
-int binarySearch(int* arr, const int size, const int target)
+int binary_search(int* arr, const int size, const int target)
 {
     int left = 0, right = size - 1;
     int idx = -1;
@@ -30,7 +30,7 @@ int binarySearch(int* arr, const int size, const int target)
     return idx;
 }
 
-int compare(const void* a, const void* b)
+int compare(const void* a, const void* b) // comparer for qsort function in C
 {
     return *((int*)a) - *((int*)b);
 }
@@ -45,19 +45,20 @@ int main(void)
         scanf("%d", &arr[i]);
     qsort((void*)arr, (size_t)n, sizeof(int), compare); // It must be sorted before using binary search.
     scanf("%d", &target);
-    printf("%d\n", binarySearch(arr, n, target));
-    printf("%d\n", binarySearchRecursive(arr, 0, n - 1, target));
+    printf("%d\n", binary_search(arr, n, target));
+    printf("%d\n", binary_search_recur(arr, 0, n - 1, target));
+
     free(arr);
     return 0;
 }
 
 /*
-input:
+Input:
 5
 5 4 3 2 1
 -123
 
-output:
+Output:
 -1
 -1
 */

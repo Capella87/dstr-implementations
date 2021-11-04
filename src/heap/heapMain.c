@@ -6,7 +6,7 @@
 int main(void)
 {
     Heap h;
-    initHeap(&h, 12);
+    init_heap(&h, 12);
 
     enqueue(&h, 88);
     enqueue(&h, 2);
@@ -20,11 +20,11 @@ int main(void)
     enqueue(&h, 784);
     enqueue(&h, 524);
 
-    levelOrder(&h);
+    level_order(&h);
     while (h.count > 0)
         printf("%d ", dequeue(&h));
     putchar('\n');
     
-    freeAll(&h);
+    free_all(&h);
     return 0;
 }

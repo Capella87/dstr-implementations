@@ -12,11 +12,11 @@ typedef struct _heap
 
 inline void swap(Data* a, Data* b);
 
-bool initHeap(Heap* h, const int max);
+bool init_heap(Heap* h, const int max);
 bool enqueue(Heap* h, const Data d);
 Data dequeue(Heap* h);
-void levelOrder(Heap* h);
-bool freeAll(Heap* h);
+void level_order(Heap* h);
+bool free_all(Heap* h);
 
 bool enqueue_min(Heap* h, const Data d);
 Data dequeue_max(Heap* h);
