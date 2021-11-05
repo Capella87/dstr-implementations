@@ -1,26 +1,26 @@
 using System;
 
-namespace bsearch
+namespace BSearch
 {
     public class BSearch
     {
-        private int[] numArr;
-        private int arrSize;
+        private int[] _numArr;
+        private int _arrSize;
 
-        public int BinarySearch(int target) // Non-recursive
+        public int BinarySearch(int target) // Non-recursive binary search
         {
-            int left = 0, right = this.arrSize - 1;
+            int left = 0, right = this._arrSize - 1;
             int idx = -1;
             
             while (left <= right)
             {
                 int mid = (left + right) / 2;
-                if (numArr[mid] == target)
+                if (_numArr[mid] == target)
                 {
                     idx = mid;
                     break;
                 }
-                else if (target < numArr[mid])
+                else if (target < _numArr[mid])
                     right = mid - 1;
                 else left = mid + 1;
             }
@@ -30,11 +30,11 @@ namespace bsearch
         public BSearch()
         {
             string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            this.numArr = new int[input.Length];
-            this.arrSize = input.Length;
-            for (var i = 0; i < this.arrSize; i++)
-                numArr[i] = Convert.ToInt32(input[i]);
-            Array.Sort(this.numArr);
+            this._numArr = new int[input.Length];
+            this._arrSize = input.Length;
+            for (var i = 0; i < this._arrSize; i++)
+                _numArr[i] = Convert.ToInt32(input[i]);
+            Array.Sort(this._numArr);
         }
     }
 
@@ -42,21 +42,20 @@ namespace bsearch
     {
         static void Main()
         {
-            BSearch a = new BSearch();
+            BSearch a = new();
             Console.WriteLine(a.BinarySearch(Convert.ToInt32(Console.ReadLine())));
         }
     }
-
+}
     /*
         BinarySearch method returns -1 if the target is not exist in the array.
         Otherwise, it returns the index of target in array.
     */
 
     /*
-        input:
+        Input:
         5 4 3 2 1
         123
-        output:
+        Output:
         -1
     */
-}

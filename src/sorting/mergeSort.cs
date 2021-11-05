@@ -1,12 +1,12 @@
 using System;
 
-namespace sort
+namespace MSort
 {
     public class MSort
     {
-        private int[] targetArr;
-        private int[] targetBuffer;
-        public int arrSize;
+        private int[] _targetArr;
+        private int[] _targetBuffer;
+        private int _arrSize;
 
         public void MergeSort(int left, int right)
         {
@@ -23,53 +23,59 @@ namespace sort
 
             while (i <= mid && j <= right)
             {
-                if (targetArr[i] < targetArr[j])
-                    targetBuffer[k++] = targetArr[i++];
-                else targetBuffer[k++] = targetArr[j++];
+                if (_targetArr[i] < _targetArr[j])
+                    _targetBuffer[k++] = _targetArr[i++];
+                else _targetBuffer[k++] = _targetArr[j++];
             }
             while (i <= mid)
-                targetBuffer[k++] = targetArr[i++];
+                _targetBuffer[k++] = _targetArr[i++];
             while (j <= right)
-                targetBuffer[k++] = targetArr[j++];
+                _targetBuffer[k++] = _targetArr[j++];
             for (var l = left; l <= right; l++)
-                targetArr[l] = targetBuffer[l];
+                _targetArr[l] = _targetBuffer[l];
             return;
         }
 
-        public void PrintArr()
+        public void PrintArray()
         {
-            for (var i = 0; i < this.arrSize; i++)
-                Console.Write($"{targetArr[i]} ");
+            for (var i = 0; i < this._arrSize; i++)
+                Console.Write($"{_targetArr[i]} ");
             Console.WriteLine();
+        }
+
+        public int GetSize()
+        {
+            return _arrSize;
         }
 
         public MSort()
         {
             string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            this.arrSize = input.Length; // input count
-            this.targetArr = new int[this.arrSize];
-            this.targetBuffer = new int[this.arrSize];
-            for (var i = 0; i < this.arrSize; i++)
-                targetArr[i] = Convert.ToInt32(input[i]);
+            this._arrSize = input.Length; // input count
+            this._targetArr = new int[this._arrSize];
+            this._targetBuffer = new int[this._arrSize];
+            for (var i = 0; i < this._arrSize; i++)
+                _targetArr[i] = Convert.ToInt32(input[i]);
         }
-        
-        public static void Main() // Driver code
+    }
+
+    public class MainApp
+    {
+        public static void Main()
         {
-            MSort t = new MSort();
-            Console.Write("Before: ");
-            t.PrintArr();
-            t.MergeSort(0, t.arrSize - 1);
-            Console.Write("After:  ");
-            t.PrintArr();
+            MSort m = new();
+            m.PrintArray();
+            m.MergeSort(0, m.GetSize() - 1);
+            m.PrintArray();
         }
     }
 }
 
 /*
-input:
+Input:
 5 4 3 2 1
 
-output:
-Before : 5 4 3 2 1
-After  : 1 2 3 4 5
+Output:
+5 4 3 2 1
+1 2 3 4 5
 */
