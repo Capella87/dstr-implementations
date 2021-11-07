@@ -49,20 +49,27 @@ It has data structure and some sorting implementations in several languages. Cur
 * Deque (Linked List based)
 * Queue (Linked List based)
 * AVL Tree
-* Tim Sort
-* Intro Sort
 * Radix Sort
-* Random Quick Sort
 * Linear Search
 * Hash Table
 * Binary Tree
 * Tree (Ordinary)
+
+## In Plan
+* Cocktail Shaker Sort
+* Block Merge Sort
+* Sleep Sort
+* Pancake Sort
+* Slow Sort
+* Tim Sort
+* Intro Sort
+* Random Quick Sort
 
 ## Feedback
 Use Issue tracker in GitHub for any trouble or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 Last Modified: Nov 6, 2021
+Created: Nov 6, 2021 | Last Modified: Nov 7, 2021
 
 Copyright © 2021 Capella87. Licensed under MIT License.
