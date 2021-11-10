@@ -1,4 +1,4 @@
-def mergeSort(arr):
+def merge_sort(arr):
     if len(arr) <= 1:
         return
 
@@ -7,8 +7,8 @@ def mergeSort(arr):
     right = arr[mid:]
 
     # Divide
-    mergeSort(left)
-    mergeSort(right)
+    merge_sort(left)
+    merge_sort(right)
 
     # Conquer
     i = j = k = 0
@@ -33,7 +33,7 @@ def mergeSort(arr):
     return
 
 
-def printArray(arr, size):
+def print_array(arr, size):
     for i in range(0, size):
         print(arr[i], end=' ')
     print()
@@ -42,16 +42,16 @@ def printArray(arr, size):
 arr = list(map(int, input().split()))
 size = len(arr)
 print("Before : ", end=' ')
-printArray(arr, size)
-mergeSort(arr)
+print_array(arr, size)
+merge_sort(arr)
 print("After  : ", end=' ')
-printArray(arr, size)
+print_array(arr, size)
 
 '''
-input:
+Input:
 5 4 3 2 1
 
-output:
-Before : 5 4 3 2 1
-After  : 1 2 3 4 5
+Output:
+5 4 3 2 1
+1 2 3 4 5
 '''

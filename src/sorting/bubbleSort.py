@@ -1,11 +1,11 @@
-def bubbleSort(arr, size):
+def bubble_sort(arr, size):
     for i in range(0, size - 1):
         for j in range(0, size - 1 - i):
             if arr[j] > arr[j + 1]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
 
-def printArray(arr, size):
+def print_array(arr, size):
     for i in range(0, size):
         print(arr[i], end=' ')
     print()
@@ -14,6 +14,15 @@ def printArray(arr, size):
 arr = list(map(int, input().split()))
 size = len(arr)
 
-printArray(arr, size)
-bubbleSort(arr, size)
-printArray(arr, size)
+print_array(arr, size)
+bubble_sort(arr, size)
+print_array(arr, size)
+
+'''
+Input:
+5 4 3 2 1
+
+Output:
+5 4 3 2 1
+1 2 3 4 5
+'''

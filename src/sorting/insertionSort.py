@@ -1,4 +1,4 @@
-def insertionSort(arr, size):
+def insertion_sort(arr, size):
     for i in range(1, size):
         temp = arr[i]
         j = i - 1
@@ -8,7 +8,7 @@ def insertionSort(arr, size):
         arr[j + 1] = temp
 
 
-def printArray(arr, size):
+def print_array(arr, size):
     for i in range(0, size):
         print(arr[i], end=' ')
     print()
@@ -17,6 +17,15 @@ def printArray(arr, size):
 arr = list(map(int, input().split()))
 size = len(arr)
 
-printArray(arr, size)
-insertionSort(arr, size)
-printArray(arr, size)
+print_array(arr, size)
+insertion_sort(arr, size)
+print_array(arr, size)
+
+'''
+Input:
+5 4 3 2 1
+
+Output:
+5 4 3 2 1
+1 2 3 4 5
+'''
