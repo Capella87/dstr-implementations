@@ -54,9 +54,12 @@ It has data structure and some sorting implementations in several languages. Cur
 * Hash Table
 * Binary Tree
 * Tree (Ordinary)
+* Binary Search - Upper Bound
+* Binary Search - Lower Bound
+* Interpolation Search
+* Cocktail Shaker Sort
 
 ## In Plan
-* Cocktail Shaker Sort
 * Block Merge Sort
 * Sleep Sort
 * Pancake Sort
@@ -70,6 +73,6 @@ Use Issue tracker in GitHub for any trouble or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Nov 7, 2021
+Created: Nov 6, 2021 | Last Modified: Nov 12, 2021
 
 Copyright © 2021 Capella87. Licensed under MIT License.
