@@ -41,8 +41,8 @@ Output:
 Peeked number in the stack: 100
 Items: 100 37 10 520
 
-ERROR: The targeted stack is empty.
-ERROR: There's no item in the stack.
+ERROR: The stack is empty.
+ERROR: The stack is empty.
 Push 1 in the stack.
 Items: 1
 */
