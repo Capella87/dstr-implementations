@@ -21,33 +21,47 @@ bool init_stack(Stack* stk) // Initialize stack.
 {
     stk->head = get_node(-1);
     stk->trailer = get_node(-1);
-    if (!stk->head || !stk->trailer) return false;
+    if (!stk->head || !stk->trailer)
+    {
+        fprintf(stderr, "ERROR: Could not allocate memory.\n");
+        goto err_exit;
+    }
 
     stk->head->next = stk->trailer;
     stk->head->prev = stk->trailer->next = NULL;
     stk->trailer->prev = stk->head;
     stk->size = 0;
+
     return true;
+err_exit:
+    return false;
 }
 
 bool push(Stack* stk, const Data d) // Push element in the stack.
 {
     Node* t = get_node(d);
-    if (!t) return false;
+    if (!t)
+    {
+        fprintf(stderr, "ERROR: Could not allocate memory.\n");
+        goto err_exit;
+    }
 
     t->next = stk->head->next;
     t->prev = stk->head;
     stk->head->next = t->next->prev = t;
     stk->size++;
+
     return true;
+err_exit:
+    return false;
 }
 
 Data pop(Stack* stk) // Pop element from the stack. Returns removed element's data.
 {
     if (is_empty(stk))
     {
-        fprintf(stderr, "ERROR: The targeted stack is empty.\n");
-        goto err_exit;
+        fprintf(stderr, "ERROR: The %s is empty.\n", OBJ);
+        return -1;
     }
     Node* temp = stk->head->next;
     Data rt = temp->d;
@@ -55,29 +69,25 @@ Data pop(Stack* stk) // Pop element from the stack. Returns removed element's da
     temp->next->prev = stk->head;
     stk->size--;
     free(temp);
-    return rt;
 
-err_exit:
-    return -1;
+    return rt;
 }
 Data peek(const Stack* stk) // Returns front element's data. Returns -1 when there is no item in stack.
 {
     if (is_empty(stk))
     {
-        fprintf(stderr, "ERROR: The targeted stack is empty.\n");
-        goto err_exit;
+        fprintf(stderr, "ERROR: The %s is empty.\n", OBJ);
+        return -1;
     }
 
     return stk->head->next->d;
-err_exit:
-    return -1;
 }
 
 bool traverse(Stack* stk) // Print all elements in the stack. Returns false when the stack is empty.
 {
     if (is_empty(stk))
     {
-        fprintf(stderr, "ERROR: There's no item in the stack.\n");
+        fprintf(stderr, "ERROR: The %s is empty.\n", OBJ);
         return false;
     }
 
@@ -88,6 +98,7 @@ bool traverse(Stack* stk) // Print all elements in the stack. Returns false when
         cur = cur->next;
     }
     putchar('\n');
+
     return true;
 }
 
@@ -106,5 +117,6 @@ bool free_all(Stack* stk) // Remove all elements and deallocate memory.
     while (!is_empty(stk)) pop(stk);
     free(stk->head);
     free(stk->trailer);
+    
     return true;
 }

@@ -2,6 +2,7 @@
 #define STACK_H
 
 #include <stdbool.h>
+#define OBJ "stack"
 
 typedef int Data;
 typedef struct _node
