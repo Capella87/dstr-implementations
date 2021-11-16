@@ -16,6 +16,8 @@ It has data structure and some sorting implementations in several languages. Cur
 * Java
 * JavaScript
 * Rust
+* TypeScript
+* Visual BASIC .NET
 
 ## Contents
 
@@ -37,35 +39,36 @@ It has data structure and some sorting implementations in several languages. Cur
 
 ### Search
 * Binary Search
+* Binary Search - Lower Bound
+* Binary Search - Upper Bound
 
 ### Data Structure
 * Heap (Array based; Max and min heap)
 * Stack (Linked List based)
+* Queue (Linked List based)
 
 ## Upcoming Implementations
 * Stack (Array Based)
 * Linked List
 * Double Linked List
 * Deque (Linked List based)
-* Queue (Linked List based)
 * AVL Tree
 * Radix Sort
 * Linear Search
 * Hash Table
 * Binary Tree
 * Tree (Ordinary)
-* Binary Search - Upper Bound
-* Binary Search - Lower Bound
 * Interpolation Search
 * Cocktail Shaker Sort
+* Tim Sort
+* Intro Sort
+* Graph
 
 ## In Plan
 * Block Merge Sort
 * Sleep Sort
 * Pancake Sort
 * Slow Sort
-* Tim Sort
-* Intro Sort
 * Random Quick Sort
 
 ## Feedback
@@ -73,6 +76,6 @@ Use Issue tracker in GitHub for any trouble or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Nov 12, 2021
+Created: Nov 6, 2021 | Last Modified: Nov 17, 2021
 
 Copyright © 2021 Capella87. Licensed under MIT License.
