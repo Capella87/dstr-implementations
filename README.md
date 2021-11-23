@@ -36,6 +36,7 @@ It has data structure and some sorting implementations in several languages. Cur
 
 ### Tree
 * Binary Search Tree (BST)
+* AVL Tree
 
 ### Search
 * Binary Search
@@ -52,7 +53,6 @@ It has data structure and some sorting implementations in several languages. Cur
 * Linked List
 * Double Linked List
 * Deque (Linked List based)
-* AVL Tree
 * Radix Sort
 * Linear Search
 * Hash Table
@@ -60,6 +60,7 @@ It has data structure and some sorting implementations in several languages. Cur
 * Tree (Ordinary)
 * Interpolation Search
 * Cocktail Shaker Sort
+* Splay Tree
 * Tim Sort
 * Intro Sort
 * Graph
@@ -76,6 +77,6 @@ Use Issue tracker in GitHub for any trouble or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Nov 17, 2021
+Created: Nov 6, 2021 | Last Modified: Nov 24, 2021
 
 Copyright © 2021 Capella87. Licensed under MIT License.
