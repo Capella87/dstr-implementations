@@ -20,16 +20,18 @@ int main()
     insert(root, NULL, 529);
     insert(root, NULL, 784);
     insert(root, NULL, 523);
-    inOrderTraverse(root);
+    
+    inorder(root);
     cout << '\n';
-    levelOrderTraverse(root);
+    level_order(root);
     cout << "Depth of " << KEYWORD << " : " << depth(search(root, KEYWORD)) << '\n';
     cout << "Heights of tree: " << height(root) << '\n';
     detree(root, KEYWORD);
-    inOrderTraverse(root);
+    inorder(root);
     cout << '\n';
     if (!search(root, KEYWORD)) cout << KEYWORD << " is NOT exist in tree.\n";
     else cout << KEYWORD << " is exist in tree.\n";
-    removeAll(root);
+    
+    free_all(root);
     return 0;
 }

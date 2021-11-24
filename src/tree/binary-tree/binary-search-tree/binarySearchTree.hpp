@@ -12,15 +12,20 @@ typedef struct _node
     struct _node* parent;
 } Node;
 
-bool isRoot(const Node* t);
-Node* getNode(const Data d);
+bool is_root(const Node* t);
+Node* get_node(const Data d);
+
 Node* insert(Node* root, Node* parent, const Data d);
+Node* detree(Node* root, const Data t);
+
 int height(Node* root);
 int depth(Node* t);
-Node* minValueNode(Node* t);
-Node* detree(Node* root, const Data t);
-void inOrderTraverse(Node* t);
-void levelOrderTraverse(Node* t);
+Node* min_node(Node* t);
+
+void inorder(Node* t);
+void level_order(Node* t);
+
 Node* search(Node* root, const Data t);
-void removeAll(Node* root);
+
+void free_all(Node* root);
 #endif

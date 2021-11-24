@@ -3,51 +3,31 @@
 #include <queue>
 using namespace std;
 
-bool isRoot(const Node* t) // 루트인 경우 true를 반환
+bool is_root(const Node* t) // 루트인 경우 true를 반환
 {
     return !t->parent ? true : false;
 }
 
-Node* getNode(const Data d) // 노드 생성
+Node* get_node(const Data d) // 노드 생성
 {
-    Node* newNode = new Node;
-    newNode->d = d;
-    newNode->left = newNode->right = newNode->parent = NULL;
-    return newNode;
+    Node* n = new Node;
+    n->d = d;
+    n->left = n->right = n->parent = NULL;
+    return n;
 }
+
 
 Node* insert(Node* root, Node* parent, const Data d) // 위치를 찾아 트리에 대입
 {
     if (!root) // 해당 위치를 찾은 경우
     {
-        Node* root = getNode(d);
+        Node* root = get_node(d);
         root->parent = parent;
         return root;
     }
     if (root->d < d) root->right = insert(root->right, root, d);
     else if (root->d > d) root->left = insert(root->left, root, d);
     return root;
-}
-
-int height(Node* root) // 트리 높이
-{
-    if (!root->left && !root->right) return 0;
-    else if (root->left && !root->right) return 1 + height(root->left);
-    else if (root->right && !root->left) return 1 + height(root->right);
-    else return 1 + MAX(height(root->left), height(root->right));
-}
-
-int depth(Node* t) // 루트로부터 특정 노드 간의 거리인 '높이'
-{
-    return isRoot(t) ? 0 : 1 + depth(t->parent);
-}
-
-Node* minValueNode(Node* t) // 삭제 대상 노드 자식들 중 가장 작은 노드를 찾는다.
-{
-    Node* cur = t;
-    while (cur && cur->left)
-        cur = cur->left;
-    return cur;
 }
 
 Node* detree(Node* root, const Data t) // 대상을 찾아 트리에서 삭제
@@ -73,23 +53,46 @@ Node* detree(Node* root, const Data t) // 대상을 찾아 트리에서 삭제
             return temp;
         }
         // 둘 다 있는 경우
-        Node* temp = minValueNode(root->right);
+        Node* temp = min_node(root->right);
         root->d = temp->d;
         root->right = detree(root->right, temp->d);
     }
     return root;
 }
 
-void inOrderTraverse(Node* t) // 중위 순회
+
+int height(Node* root) // 트리 높이
+{
+    if (!root->left && !root->right) return 0;
+    else if (root->left && !root->right) return 1 + height(root->left);
+    else if (root->right && !root->left) return 1 + height(root->right);
+    else return 1 + MAX(height(root->left), height(root->right));
+}
+
+int depth(Node* t) // 루트로부터 특정 노드 간의 거리인 '높이'
+{
+    return is_root(t) ? 0 : 1 + depth(t->parent);
+}
+
+Node* min_node(Node* t) // 삭제 대상 노드 자식들 중 가장 작은 노드를 찾는다.
+{
+    Node* cur = t;
+    while (cur && cur->left)
+        cur = cur->left;
+    return cur;
+}
+
+
+void inorder(Node* t) // 중위 순회
 {
     if (!t) return;
-    if (t->left) inOrderTraverse(t->left);
+    if (t->left) inorder(t->left);
     printf("%d ", t->d);
-    if (t->right) inOrderTraverse(t->right);
+    if (t->right) inorder(t->right);
     return;
 }
 
-void levelOrderTraverse(Node* t) // 레벨 순회 (루트부터 뿌리순으로 순회)
+void level_order(Node* t) // 레벨 순회 (루트부터 뿌리순으로 순회)
 {
     queue<Node*> q;
     q.push(t);
@@ -105,6 +108,7 @@ void levelOrderTraverse(Node* t) // 레벨 순회 (루트부터 뿌리순으로 
     return;
 }
 
+
 Node* search(Node* root, const Data t) // 대상을 찾는다. 없는 경우 NULL을 반환
 {
     if (!root) return root;
@@ -114,12 +118,13 @@ Node* search(Node* root, const Data t) // 대상을 찾는다. 없는 경우 NUL
     return root;
 }
 
-void removeAll(Node* root) // 종료 전 모든 노드 공간 반환
+
+void free_all(Node* root) // 종료 전 모든 노드 공간 반환
 {
     if (!root) return;
 
-    if (root->left) removeAll(root->left);
-    if (root->right) removeAll(root->right);
+    if (root->left) free_all(root->left);
+    if (root->right) free_all(root->right);
     free(root);
     return;
 }
