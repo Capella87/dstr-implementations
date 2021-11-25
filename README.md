@@ -33,7 +33,6 @@ It has data structure and some sorting implementations in several languages. Cur
 * Shell Sort
 * Tree Sort
 
-
 ### Tree
 * Binary Search Tree (BST)
 * AVL Tree
@@ -63,6 +62,7 @@ It has data structure and some sorting implementations in several languages. Cur
 * Splay Tree
 * Tim Sort
 * Intro Sort
+* Dictionary
 * Graph
 
 ## In Plan
@@ -73,10 +73,10 @@ It has data structure and some sorting implementations in several languages. Cur
 * Random Quick Sort
 
 ## Feedback
-Use Issue tracker in GitHub for any trouble or implementation requests.
+Use Issue tracker in GitHub repository for any trouble or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Nov 24, 2021
+Created: Nov 6, 2021 | Last Modified: Nov 26, 2021
 
 Copyright © 2021 Capella87. Licensed under MIT License.
