@@ -10,6 +10,7 @@ It has data structure and some sorting implementations in several languages. Cur
 * C++
 * C#
 * Python
+* Visual BASIC .NET (Auto conversion from C#)
 
 ### In Future
 * Go
@@ -17,12 +18,12 @@ It has data structure and some sorting implementations in several languages. Cur
 * JavaScript
 * Rust
 * TypeScript
-* Visual BASIC .NET
 
 ## Contents
 
 ### Sorting
 * Bubble Sort
+* Cocktail Shaker Sort
 * Counting Sort
 * Exchange Sort
 * Heap Sort
@@ -35,12 +36,14 @@ It has data structure and some sorting implementations in several languages. Cur
 
 ### Tree
 * Binary Search Tree (BST)
+* Binary Tree
 * AVL Tree
 
 ### Search
 * Binary Search
 * Binary Search - Lower Bound
 * Binary Search - Upper Bound
+* Interpolation Search
 
 ### Data Structure
 * Heap (Array based; Max and min heap)
@@ -55,10 +58,7 @@ It has data structure and some sorting implementations in several languages. Cur
 * Radix Sort
 * Linear Search
 * Hash Table
-* Binary Tree
 * Tree (Ordinary)
-* Interpolation Search
-* Cocktail Shaker Sort
 * Splay Tree
 * Tim Sort
 * Intro Sort
@@ -77,6 +77,6 @@ Use Issue tracker in GitHub repository for any trouble or implementation request
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Nov 26, 2021
+Created: Nov 6, 2021 | Last Modified: Nov 30, 2021
 
 Copyright © 2021 Capella87. Licensed under MIT License.
