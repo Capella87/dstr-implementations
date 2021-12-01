@@ -9,13 +9,23 @@ int height(const Node* n)
     return !n ? 0 : n->height;
 }
 
+bool is_root(const Node* n)
+{
+    return !n->parent ? true : false;
+}
+
+int depth(Node* n)
+{
+    return is_root(n) ? 0 : 1 + depth(n->parent);
+}
+
 Node* get_node(const Data d)
 {
     Node* new_node = (Node*)malloc(sizeof(Node));
     if (!new_node) return NULL;
 
     new_node->data = d;
-    new_node->left = new_node->right = NULL;
+    new_node->left = new_node->right = new_node->parent = NULL;
     new_node->height = 1;
 
     return new_node;
@@ -30,6 +40,8 @@ Node* get_node(const Data d)
          (b) (c)       (a) (b)
 */
 
+// n->parent t->parent (b)->parent : Needs to be updated.
+
 Node* left_rotation(Node* n)
 {
     Node* t = n->right;
@@ -37,6 +49,11 @@ Node* left_rotation(Node* n)
 
     t->left = n;
     n->right = temp;
+
+    // Update parent
+    t->parent = n->parent;
+    n->parent = t;
+    if (n->right) n->right->parent = n;
 
     // Update heights
     n->height = 1 + MAX(height(n->left), height(n->right));
@@ -54,6 +71,8 @@ Node* left_rotation(Node* n)
     (a) (b)                 (b)  (c)
 */
 
+// n->parent, t->parent, (b)->parent : Needs to be updated.
+
 Node* right_rotation(Node* n)
 {
     Node* t = n->left;
@@ -61,11 +80,16 @@ Node* right_rotation(Node* n)
 
     t->right = n;
     n->left = temp;
+    
+    // Update parent
+    t->parent = n->parent;
+    n->parent = t;
+    if (n->left) n->left->parent = n;
 
     // Update heights
     n->height = 1 + MAX(height(n->left), height(n->right));
     t->height = 1 + MAX(height(t->left), height(t->right));
-    
+
     return t;
 }
 
@@ -74,19 +98,20 @@ int get_balance(const Node* n)
     return !n ? 0 : height(n->left) - height(n->right);
 }
 
-Node* insert(Node* n, const Data d)
+Node* insert(Node* n, Node* parent, const Data d)
 {
     if (!n)
     {
         n = get_node(d);
+        n->parent = parent;
         if (!n) exit(EXIT_FAILURE);
         return n;
     }
-    
+
     if (d < n->data)
-        n->left = insert(n->left, d);
+        n->left = insert(n->left, n, d);
     else if (n->data < d)
-        n->right = insert(n->right, d);
+        n->right = insert(n->right, n, d);
     else return n;
 
     n->height = 1 + MAX(height(n->left), height(n->right));
@@ -138,7 +163,11 @@ Node* detree(Node* n, const Data d)
                 temp = n;
                 n = NULL;
             }
-            else *n = *temp; // Move child value to old n node
+            else
+            {
+                temp->parent = n->parent;
+                *n = *temp;
+            } // Move child value to old n node
             free(temp);
         }
         else // two children
@@ -150,10 +179,10 @@ Node* detree(Node* n, const Data d)
     }
 
     if (!n) return n;
-    
+
     // Update height
     n->height = 1 + MAX(height(n->left), height(n->right));
-    
+
     // Update balance
     int balance = get_balance(n);
 
@@ -174,6 +203,16 @@ Node* detree(Node* n, const Data d)
     }
     else if (balance < -1 && right_balance <= 0)
         return left_rotation(n);
+
+    return n;
+}
+
+Node* search(Node* n, const Data d)
+{
+    if (!n) return n;
+
+    if (d < n->data) return search(n->left, d);
+    else if (n->data < d) return search(n->right, d);
 
     return n;
 }
@@ -236,13 +275,13 @@ int main()
 {
     Node* root = NULL;
 
-    root = insert(root, 123);
-    root = insert(root, 129);
-    root = insert(root, 423);
-    root = insert(root, 3);
-    root = insert(root, 12);
-    root = insert(root, 124);
-    root = insert(root, 122);
+    root = insert(root, NULL, 123);
+    root = insert(root, NULL, 129);
+    root = insert(root, NULL, 423);
+    root = insert(root, NULL, 3);
+    root = insert(root, NULL, 12);
+    root = insert(root, NULL, 124);
+    root = insert(root, NULL, 122);
 
     printf("Preorder: ");
     preorder_traversal(root);
@@ -251,16 +290,44 @@ int main()
     printf("Levelorder: ");
     levelorder_traversal(root);
 
+    printf("Inorder: ");
+    inorder_traversal(root);
+    putchar('\n');
+
+    printf("Postorder: ");
+    postorder_traversal(root);
+    puts("\n");
+
+    // Search
+    Node* q = search(root, 423);
+    if (q) printf("%d is exist in the array.\n", 423);
+    else printf("%d is NOT exist in the array.\n", 423);
+    putchar('\n');
+
+    printf("Delete %d, %d and %d.\n\n", 423, 124, 129);
     root = detree(root, 423);
     root = detree(root, 124);
     root = detree(root, 129);
 
+    q = search(root, 423);
+    if (q) printf("%d is exist in the array.\n", 423);
+    else printf("%d is NOT exist in the array.\n", 423);
+    putchar('\n');
+
     printf("Preorder: ");
     preorder_traversal(root);
     putchar('\n');
 
     printf("Levelorder: ");
     levelorder_traversal(root);
+
+    printf("Inorder: ");
+    inorder_traversal(root);
+    putchar('\n');
+
+    printf("Postorder: ");
+    postorder_traversal(root);
+    putchar('\n');
 
     free_all(root);
     return 0;

@@ -10,10 +10,13 @@ typedef struct _node
     Data data;
     struct _node* left;
     struct _node* right;
+    struct _node* parent;
     int height;
 } Node;
 
 int height(const Node* n);
+bool is_root(const Node* n);
+int depth(Node* n);
 Node* get_node(const Data d);
 
 Node* left_rotation(Node* n);
@@ -25,6 +28,7 @@ Node* min_node(Node* n);
 Node* insert(Node* n, const Data d);
 Node* detree(Node* n, const Data d);
 
+Node* search(Node* n, const Data d);
 void preorder_traversal(Node* n);
 void inorder_traversal(Node* n);
 void postorder_traversal(Node* n);
