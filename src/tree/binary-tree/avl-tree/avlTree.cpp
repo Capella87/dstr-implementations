@@ -103,8 +103,8 @@ Node* insert(Node* n, Node* parent, const Data d)
     if (!n)
     {
         n = get_node(d);
-        n->parent = parent;
         if (!n) exit(EXIT_FAILURE);
+        n->parent = parent;
         return n;
     }
 
