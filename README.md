@@ -60,8 +60,9 @@ It has data structure and some sorting implementations in several languages. Cur
 * Hash Table
 * Tree (Ordinary)
 * Splay Tree
+* Red-Black Tree
 * Bucket Sort
-* Tim Sort
+* Timsort
 * Intro Sort
 * Dictionary
 * Graph
@@ -77,12 +78,14 @@ It has data structure and some sorting implementations in several languages. Cur
 * Red-Black Tree
 * Binomial Heap
 * Comb Sort
+* Topological Sort
+* Trie
 
 ## Feedback
 Use Issue tracker in GitHub repository for any trouble or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Dec 6, 2021
+Created: Nov 6, 2021 | Last Modified: Dec 10, 2021
 
 Copyright © 2021-2022 Capella87. Licensed under MIT License.
