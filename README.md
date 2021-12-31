@@ -87,12 +87,15 @@ It has data structure and some sorting implementations in several languages. Cur
 * Tournament Sort
 * Gnome Sort
 * Bogosort
+* B-Tree
+* B+Tree
+
 
 ## Feedback
 Use Issue tracker in GitHub repository for any trouble or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Dec 11, 2021
+Created: Nov 6, 2021 | Last Modified: Dec 31, 2021
 
 Copyright © 2021-2022 Capella87. Licensed under MIT License.
