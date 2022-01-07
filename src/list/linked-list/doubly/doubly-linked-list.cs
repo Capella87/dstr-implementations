@@ -41,7 +41,7 @@ namespace Doubly
             _size = 0;
         }
 
-        public bool FrontInsert(int d) // Insert an element behind _head.
+        public bool InsertFirst(in int d) // Insert an element behind _head.
         {
             var newNode = new Node(d);
 
@@ -54,7 +54,7 @@ namespace Doubly
             return true;
         }
 
-        public bool BackInsert(int d) // Insert an element in front of _tail.
+        public bool InsertLast(in int d) // Insert an element in front of _tail.
         {
             var newNode = new Node(d);
 
@@ -103,7 +103,7 @@ namespace Doubly
             return true;
         }
 
-        public bool RemoveFront()
+        public bool RemoveFirst()
         {
             if (_size == 0)
             {
@@ -124,7 +124,7 @@ namespace Doubly
             return false;
         }
 
-        public bool RemoveBack()
+        public bool RemoveLast()
         {
             if (_size == 0)
             {
@@ -206,14 +206,14 @@ namespace Doubly
         {
             DoublyList dl = new DoublyList();
 
-            dl.FrontInsert(1);
-            dl.FrontInsert(2);
-            dl.FrontInsert(3);
-            dl.FrontInsert(4);
-            dl.BackInsert(5);
-            dl.BackInsert(6);
-            dl.BackInsert(7);
-            dl.BackInsert(8);
+            dl.InsertFirst(1);
+            dl.InsertFirst(2);
+            dl.InsertFirst(3);
+            dl.InsertFirst(4);
+            dl.InsertLast(5);
+            dl.InsertLast(6);
+            dl.InsertLast(7);
+            dl.InsertLast(8);
 
             Console.Write("Front: ");
             dl.FrontTraverse();
@@ -222,11 +222,11 @@ namespace Doubly
             dl.BackTraverse();
 
             // Remove some elements from the list and traverse elements.
-            dl.RemoveFront();
-            dl.RemoveFront();
+            dl.RemoveFirst();
+            dl.RemoveFirst();
             dl.FrontTraverse();
-            dl.RemoveBack();
-            dl.RemoveBack();
+            dl.RemoveLast();
+            dl.RemoveLast();
             dl.FrontTraverse();
 
             Console.WriteLine($"There are {dl.size} entries in the list.");
