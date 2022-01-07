@@ -46,6 +46,7 @@ It has data structure and some sorting implementations in several languages. Cur
 * Interpolation Search
 
 ### Data Structure
+* Doubly Linked List
 * Heap (Array based; Max and min heap)
 * Stack (Linked List based)
 * Queue (Linked List based)
@@ -53,7 +54,6 @@ It has data structure and some sorting implementations in several languages. Cur
 ## Upcoming Implementations
 * Stack (Array Based)
 * Linked List
-* Double Linked List
 * Deque (Linked List based)
 * Radix Sort
 * Linear Search
@@ -96,6 +96,6 @@ Use Issue tracker in GitHub repository for any trouble or implementation request
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Dec 31, 2021
+Created: Nov 6, 2021 | Last Modified: Jan 6, 2022
 
 Copyright © 2021-2022 Capella87. Licensed under MIT License.
