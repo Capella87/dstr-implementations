@@ -21,6 +21,21 @@ It has data structure and some sorting implementations in several languages. Cur
 
 ## Contents
 
+### Data Structure
+* Doubly Linked List
+* Heap (Array based; Max and min heap)
+* Stack (Linked List based)
+* Queue (Linked List based)
+
+### Graph
+* Undirected Graph
+
+### Search
+* Binary Search
+* Binary Search - Lower Bound
+* Binary Search - Upper Bound
+* Interpolation Search
+
 ### Sorting
 * Bubble Sort
 * Cocktail Shaker Sort
@@ -39,17 +54,6 @@ It has data structure and some sorting implementations in several languages. Cur
 * Binary Tree
 * AVL Tree
 
-### Search
-* Binary Search
-* Binary Search - Lower Bound
-* Binary Search - Upper Bound
-* Interpolation Search
-
-### Data Structure
-* Doubly Linked List
-* Heap (Array based; Max and min heap)
-* Stack (Linked List based)
-* Queue (Linked List based)
 
 ## Upcoming Implementations
 * Stack (Array Based)
@@ -65,7 +69,6 @@ It has data structure and some sorting implementations in several languages. Cur
 * Timsort
 * Intro Sort
 * Dictionary
-* Graph
 
 ## In Plan
 * Block Merge Sort
@@ -87,8 +90,8 @@ It has data structure and some sorting implementations in several languages. Cur
 * Tournament Sort
 * Gnome Sort
 * Bogosort
-* B-Tree
-* B+Tree
+* B- Tree
+* B+ Tree
 
 
 ## Feedback
@@ -96,6 +99,6 @@ Use Issue tracker in GitHub repository for any trouble or implementation request
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Jan 6, 2022
+Created: Nov 6, 2021 | Last Modified: Jan 7, 2022
 
 Copyright © 2021-2022 Capella87. Licensed under MIT License.
