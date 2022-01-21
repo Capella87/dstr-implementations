@@ -10,7 +10,7 @@ void shell_sort(int* arr, const int size)
         {
             int temp = arr[i];
             int j;
-            for (j = i; j >= interval && arr[j - interval] > temp; j -= interval)
+            for (j = i; j >= interval && arr[j - interval] > temp; j -= interval) // Insertion Sort
                 arr[j] = arr[j - interval];
             arr[j] = temp;
         }
@@ -25,6 +25,7 @@ int main(void)
     int* arr = (int*)malloc(sizeof(int) * n);
     for (int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
+    
     print_array(arr, n);
     shell_sort(arr, n);
     print_array(arr, n);
