@@ -28,6 +28,8 @@ It has data structure and some sorting implementations in several languages. Cur
 * Queue (Linked List based)
 
 ### Graph
+* Breadth-First Search
+* Depth-First Search
 * Undirected Graph
 
 ### Search
@@ -99,6 +101,6 @@ Use Issue tracker in GitHub repository for any trouble or implementation request
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Jan 7, 2022
+Created: Nov 6, 2021 | Last Modified: Jan 21, 2022
 
 Copyright © 2021-2022 Capella87. Licensed under MIT License.
