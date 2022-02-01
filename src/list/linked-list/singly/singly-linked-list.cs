@@ -37,7 +37,8 @@ namespace Singly
             _size = 0;
         }
 
-        public bool InsertFront(int d) // Insert an element behind _head.
+        // Insert an element behind _head.
+        public bool InsertFront(int d)
         {
             var newNode = new Node(d);
 
@@ -49,6 +50,7 @@ namespace Singly
             return true;
         }
 
+        // Insert an element in front of _tail.
         public bool Append(int d)
         {
             var newNode = new Node(d);
@@ -61,7 +63,8 @@ namespace Singly
             return true;
         }
 
-        public bool Insert(int d, int n) // Insert an element before the target. Find the target first and insert.
+        // Insert an element before the target. Find the target first and insert.
+        public bool Insert(int d, int n)
         {
             Node? t = SearchNode(n, out Node? targetBefore);
             if (t == null || targetBefore == null) return false;
@@ -75,7 +78,8 @@ namespace Singly
             return true;
         }
 
-        public bool FrontTraverse() // Traverse from _head to _tail. Returns false if the list is empty.
+        // Traverse from _head to _tail. Returns false if the list is empty.
+        public bool FrontTraverse()
         {
             if (_size == 0)
             {
@@ -93,6 +97,7 @@ namespace Singly
             return true;
         }
 
+        // Remove the first element from the list.
         public bool RemoveFront()
         {
             if (_size == 0)
@@ -113,6 +118,8 @@ namespace Singly
 
             return false;
         }
+
+        // Find the first element of target and get rid of it from the list. Takes O(n)
         public bool Remove(int target)
         {
             if (_size == 0)
@@ -133,6 +140,7 @@ namespace Singly
             return false;
         }
 
+        // Search a query from the first to the last. O(n)
         private Node? SearchNode(int query)
         {
             if (_size == 0)
@@ -152,6 +160,7 @@ namespace Singly
             return null;
         }
 
+        // Search a query from the first to the last. Also returns node before the target for singly linked list.
         private Node? SearchNode(int query, out Node? targetBefore)
         {
             if (_size == 0)
@@ -174,6 +183,7 @@ namespace Singly
             return null;
         }
         
+        // Find the query and show a result.
         public bool Find(int query)
         {
             Node? hasQuery = SearchNode(query);
@@ -224,3 +234,13 @@ namespace Singly
         }
     }
 }
+
+/*
+Output:
+Front: 4 123 3 2 1 456 
+3 2 1 456 
+There are 4 entries in the list.
+1 is exist in the list.
+4 is NOT exist in the list.
+3 2 456
+*/

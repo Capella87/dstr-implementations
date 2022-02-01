@@ -38,7 +38,8 @@ namespace Doubly
             _size = 0;
         }
 
-        public bool InsertFront(int d) // Insert an element behind _head.
+        // Insert an element behind _head.
+        public bool InsertFront(int d)
         {
             var newNode = new Node(d);
 
@@ -51,7 +52,8 @@ namespace Doubly
             return true;
         }
 
-        public bool Append(int d) // Insert an element in front of _tail.
+        // Insert an element in front of _tail.
+        public bool Append(int d)
         {
             var newNode = new Node(d);
 
@@ -64,7 +66,8 @@ namespace Doubly
             return true;
         }
 
-        public bool Insert(int d, int n) // Insert an element before the target. Find the target first and insert.
+        // Insert an element before the target. Find the target first and insert.
+        public bool Insert(int d, int n)
         {
             Node? t = SearchNode(n);
             if (t == null) return false;
@@ -79,7 +82,8 @@ namespace Doubly
             return true;
         }
 
-        public bool FrontTraverse() // Traverse from _head to _tail. Returns false if the list is empty.
+        // Traverse from _head to _tail. Returns false if the list is empty.
+        public bool FrontTraverse()
         {
             if (_size == 0)
             {
@@ -97,7 +101,8 @@ namespace Doubly
             return true;
         }
 
-        public bool BackTraverse() // Traverse from _head to _tail. Returns false if the list is vacant.
+        // Traverse from _head to _tail. Returns false if the list is vacant.
+        public bool BackTraverse() 
         {
             if (_size == 0)
             {
@@ -115,6 +120,7 @@ namespace Doubly
             return true;
         }
 
+        // Remove the first element from the list.
         public bool RemoveFront()
         {
             if (_size == 0)
@@ -136,6 +142,7 @@ namespace Doubly
             return false;
         }
 
+        // Remove the last element from the list.
         public bool RemoveLast()
         {
             if (_size == 0)
@@ -157,6 +164,7 @@ namespace Doubly
             return false;
         }
 
+        // Find the first element of target and get rid of it from the list. Takes O(n)
         public bool Remove(int target)
         {
             if (_size == 0)
@@ -177,6 +185,7 @@ namespace Doubly
             return false;
         }
 
+        // Search a query from the first to the last. O(n)
         private Node? SearchNode(int query)
         {
             if (_size == 0)
@@ -196,6 +205,7 @@ namespace Doubly
             return null;
         }
 
+        // Search a query from the last to the first. O(n)
         private Node? SearchNodeLast(int query)
         {
             if (_size == 0)
@@ -215,6 +225,7 @@ namespace Doubly
             return null;
         }
 
+        // Find the query and show a result.
         public bool Find(int query)
         {
             Node? hasQuery = SearchNode(query);
@@ -230,6 +241,7 @@ namespace Doubly
             }
         }
 
+        // Find the query and show a result. Traverse from the last.
         public bool FindLast(int query)
         {
             Node? hasQuery = SearchNodeLast(query);
@@ -290,3 +302,16 @@ namespace Doubly
         }
     }
 }
+
+/*
+Output:
+Front: 4 123 3 2 1 5 6 7 8 1 
+Back: 1 8 7 6 5 1 2 3 123 4 
+3 2 1 5 6 7 8 1 
+3 2 1 5 6 7 
+There are 6 entries in the list.
+1 is exist in the list.
+4 is NOT exist in the list.
+1 is exist in the list.
+3 2 5 6 7
+*/
