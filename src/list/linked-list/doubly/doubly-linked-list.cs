@@ -17,7 +17,7 @@ namespace Doubly
                 _next = null;
             }
 
-            public Node(in int data) : this()
+            public Node(int data) : this()
             {
                 this._data = data;
             }
@@ -27,10 +27,7 @@ namespace Doubly
         private Node _tail;
         private int _size;
 
-        public int size
-        {
-            get { return _size; }
-        }
+        public int size { get; }
 
         public DoublyList()
         {
@@ -41,7 +38,7 @@ namespace Doubly
             _size = 0;
         }
 
-        public bool InsertFirst(in int d) // Insert an element behind _head.
+        public bool InsertFront(int d) // Insert an element behind _head.
         {
             var newNode = new Node(d);
 
@@ -54,7 +51,7 @@ namespace Doubly
             return true;
         }
 
-        public bool InsertLast(in int d) // Insert an element in front of _tail.
+        public bool Append(int d) // Insert an element in front of _tail.
         {
             var newNode = new Node(d);
 
@@ -62,6 +59,21 @@ namespace Doubly
             newNode._prev = _tail._prev;
             _tail._prev._next = newNode;
             _tail._prev = newNode;
+            _size++;
+
+            return true;
+        }
+
+        public bool Insert(int d, int target) // Insert an element before the target. Find the target first and insert.
+        {
+            Node? t = SearchNode(target);
+            if (t == null) return false;
+
+            var newNode = new Node(d);
+            newNode._next = t;
+            newNode._prev = t._prev;
+            t._prev._next = newNode;
+            t._prev = newNode;
             _size++;
 
             return true;
@@ -103,7 +115,7 @@ namespace Doubly
             return true;
         }
 
-        public bool RemoveFirst()
+        public bool RemoveFront()
         {
             if (_size == 0)
             {
@@ -145,7 +157,7 @@ namespace Doubly
             return false;
         }
 
-        private Node? SearchNode(in int query)
+        private Node? SearchNode(int query)
         {
             if (_size == 0)
             {
@@ -164,9 +176,9 @@ namespace Doubly
             return null;
         }
 
-        public bool RemoveQuery(in int query)
+        public bool RemoveQuery(int query)
         {
-            Node? hasQuery = SearchNode(in query);
+            Node? hasQuery = SearchNode(query);
             if (hasQuery != null)
             {
                 // Remove
@@ -184,9 +196,9 @@ namespace Doubly
             }
         }
 
-        public bool SearchQuery(in int query)
+        public bool SearchQuery(int query)
         {
-            Node? hasQuery = SearchNode(in query);
+            Node? hasQuery = SearchNode(query);
             if (hasQuery != null)
             {
                 Console.WriteLine($"{query} is exist in the list.");
@@ -206,14 +218,15 @@ namespace Doubly
         {
             DoublyList dl = new DoublyList();
 
-            dl.InsertFirst(1);
-            dl.InsertFirst(2);
-            dl.InsertFirst(3);
-            dl.InsertFirst(4);
-            dl.InsertLast(5);
-            dl.InsertLast(6);
-            dl.InsertLast(7);
-            dl.InsertLast(8);
+            dl.InsertFront(1);
+            dl.InsertFront(2);
+            dl.InsertFront(3);
+            dl.InsertFront(4);
+            dl.Insert(123, 4);
+            dl.Append(5);
+            dl.Append(6);
+            dl.Append(7);
+            dl.Append(8);
 
             Console.Write("Front: ");
             dl.FrontTraverse();
@@ -222,8 +235,8 @@ namespace Doubly
             dl.BackTraverse();
 
             // Remove some elements from the list and traverse elements.
-            dl.RemoveFirst();
-            dl.RemoveFirst();
+            dl.RemoveFront();
+            dl.RemoveFront();
             dl.FrontTraverse();
             dl.RemoveLast();
             dl.RemoveLast();
