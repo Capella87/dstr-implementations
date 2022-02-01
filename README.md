@@ -52,9 +52,10 @@ It has data structure and some sorting implementations in several languages. Cur
 * Tree Sort
 
 ### Tree
+* AVL Tree
 * Binary Search Tree (BST)
 * Binary Tree
-* AVL Tree
+* Trie (Prefix Tree)
 
 
 ## Upcoming Implementations
@@ -84,7 +85,6 @@ It has data structure and some sorting implementations in several languages. Cur
 * Binomial Heap
 * Comb Sort
 * Topological Sort
-* Trie
 * Library Sort
 * Patience Sort
 * Smoothsort
@@ -101,6 +101,6 @@ Use Issue tracker in GitHub repository for any trouble or implementation request
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Jan 21, 2022
+Created: Nov 6, 2021 | Last Modified: Feb 1, 2022
 
 Copyright © 2021-2022 Capella87. Licensed under MIT License.
