@@ -24,6 +24,7 @@ It has data structure and some sorting implementations in several languages. Cur
 ### Data Structure
 * Doubly Linked List
 * Heap (Array based; Max and min heap)
+* Singly Linked List
 * Stack (Linked List based)
 * Queue (Linked List based)
 
@@ -60,7 +61,6 @@ It has data structure and some sorting implementations in several languages. Cur
 
 ## Upcoming Implementations
 * Stack (Array Based)
-* Linked List
 * Deque (Linked List based)
 * Radix Sort
 * Linear Search
