@@ -27,7 +27,7 @@ namespace Doubly
         private Node _tail;
         private int _size;
 
-        public int size { get; }
+        public int size { get => _size; }
 
         public DoublyList()
         {
@@ -64,9 +64,9 @@ namespace Doubly
             return true;
         }
 
-        public bool Insert(int d, int target) // Insert an element before the target. Find the target first and insert.
+        public bool Insert(int d, int n) // Insert an element before the target. Find the target first and insert.
         {
-            Node? t = SearchNode(target);
+            Node? t = SearchNode(n);
             if (t == null) return false;
 
             var newNode = new Node(d);
@@ -157,6 +157,26 @@ namespace Doubly
             return false;
         }
 
+        public bool Remove(int target)
+        {
+            if (_size == 0)
+            {
+                Console.WriteLine("No entries");
+                return false;
+            }
+
+            Node? cur = SearchNode(target);
+            if (cur != null)
+            {
+                cur._next._prev = cur._prev;
+                cur._prev._next = cur._next;
+                _size--;
+                return true;
+            }
+
+            return false;
+        }
+
         private Node? SearchNode(int query)
         {
             if (_size == 0)
@@ -176,17 +196,31 @@ namespace Doubly
             return null;
         }
 
-        public bool RemoveQuery(int query)
+        private Node? SearchNodeLast(int query)
+        {
+            if (_size == 0)
+            {
+                Console.WriteLine("No entries");
+                return null;
+            }
+
+            Node? cur = _tail._prev;
+            while (cur != null && cur != _head)
+            {
+                if (cur != null && cur._data == query)
+                    return cur;
+                cur = cur._prev;
+            }
+
+            return null;
+        }
+
+        public bool Find(int query)
         {
             Node? hasQuery = SearchNode(query);
             if (hasQuery != null)
             {
-                // Remove
-                hasQuery._next._prev = hasQuery._prev;
-                hasQuery._prev._next = hasQuery._next;
-                _size--;
-
-                Console.WriteLine($"Remove element {query} from the list successfully.");
+                Console.WriteLine($"{query} is exist in the list.");
                 return true;
             }
             else
@@ -196,9 +230,9 @@ namespace Doubly
             }
         }
 
-        public bool SearchQuery(int query)
+        public bool FindLast(int query)
         {
-            Node? hasQuery = SearchNode(query);
+            Node? hasQuery = SearchNodeLast(query);
             if (hasQuery != null)
             {
                 Console.WriteLine($"{query} is exist in the list.");
@@ -222,11 +256,12 @@ namespace Doubly
             dl.InsertFront(2);
             dl.InsertFront(3);
             dl.InsertFront(4);
-            dl.Insert(123, 4);
+            dl.Insert(123, 3);
             dl.Append(5);
             dl.Append(6);
             dl.Append(7);
             dl.Append(8);
+            dl.Append(1);
 
             Console.Write("Front: ");
             dl.FrontTraverse();
@@ -245,11 +280,12 @@ namespace Doubly
             Console.WriteLine($"There are {dl.size} entries in the list.");
 
             // Search 1 and 4.
-            dl.SearchQuery(1);
-            dl.SearchQuery(4);
+            dl.Find(1);
+            dl.Find(4);
+            dl.FindLast(1);
 
             // Remove 1 from the list.
-            dl.RemoveQuery(1);
+            dl.Remove(1);
             dl.FrontTraverse();
         }
     }
