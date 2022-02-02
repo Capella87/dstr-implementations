@@ -10,7 +10,7 @@ namespace Trie
             internal bool _isLeaf;
             internal Dictionary<char, Node?> _children; // Saves children
 
-        
+
             internal Node()
             {
                 _isLeaf = false;
@@ -38,7 +38,7 @@ namespace Trie
                 cur = cur._children[str[idx]]; // Go to the child.
                 idx++;
             }
-            
+
             if (cur != null) // Prevent NULL dereferencing.
             {
                 cur._isLeaf = true;
@@ -76,12 +76,13 @@ namespace Trie
                 if (cur._isLeaf) cur._isLeaf = false;
                 if (cur._children.Count == 0)
                     cur = null;
-            
+
                 return cur;
             }
 
-            // Get child node to be targeted;
-            Node? cur2 = cur._children[str[idx]];
+            // Get child node to be targeted, if the child node is NOT in the list, return raw cur and exit the recursion;
+            if (!cur._children.TryGetValue(str[idx], out Node? cur2)) return cur;
+
             cur._children[str[idx]] = Deletion(ref cur2, str, idx + 1);
             if (cur._children.Count > 0 && cur._children[str[idx]] == null) // Regarded to be deleted node, Pop out it from the dictionary.
                 cur._children.Remove(str[idx]);
@@ -113,7 +114,7 @@ namespace Trie
             Console.WriteLine("pyqt is " + (tri.Search("pyqt") ? "exist." : "NOT exist."));
             tri.Detrie("python");
             Console.WriteLine("python is " + (tri.Search("python") ? "exist." : "NOT exist."));
-            tri.Detrie("pypy");
+            tri.Detrie("pypypy"); // Wrong input;
             Console.WriteLine("pypy is " + (tri.Search("pypy") ? "exist." : "NOT exist."));
         }
     }
