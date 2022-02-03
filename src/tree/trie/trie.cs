@@ -7,13 +7,13 @@ namespace Trie
     {
         internal class Node
         {
-            internal bool _isLeaf;
+            internal bool _isEndOfString;
             internal Dictionary<char, Node?> _children; // Saves children
 
 
             internal Node()
             {
-                _isLeaf = false;
+                _isEndOfString = false;
                 _children = new Dictionary<char, Node?>();
             }
         }
@@ -41,7 +41,7 @@ namespace Trie
 
             if (cur != null) // Prevent NULL dereferencing.
             {
-                cur._isLeaf = true;
+                cur._isEndOfString = true;
                 return true;
             }
 
@@ -62,7 +62,7 @@ namespace Trie
                 idx++;
             }
 
-            return cur == null ? false : cur._isLeaf;
+            return cur == null ? false : cur._isEndOfString;
         }
 
         //Delete str from the trie.
@@ -73,7 +73,7 @@ namespace Trie
             // Reached at the end of string str.
             if (idx == str.Length)
             {
-                if (cur._isLeaf) cur._isLeaf = false;
+                if (cur._isEndOfString) cur._isEndOfString = false;
                 if (cur._children.Count == 0)
                     cur = null;
 
@@ -87,7 +87,7 @@ namespace Trie
             if (cur._children.Count > 0 && cur._children[str[idx]] == null) // Regarded to be deleted node, Pop out it from the dictionary.
                 cur._children.Remove(str[idx]);
 
-            if (cur._children.Count == 0 && !cur._isLeaf) // If there's no child, It will be deleted. (In C#, We do NOT use any deallocation code);
+            if (cur._children.Count == 0 && !cur._isEndOfString) // If there's no child, It will be deleted. (In C#, We do NOT use any deallocation code);
                 cur = null;
 
             return cur;
