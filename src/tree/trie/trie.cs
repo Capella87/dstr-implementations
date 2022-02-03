@@ -126,5 +126,5 @@ Output:
 pypy is exist.
 pyqt is NOT exist.
 python is NOT exist.
-pypy is NOT exist.
+pypy is exist.
 */
