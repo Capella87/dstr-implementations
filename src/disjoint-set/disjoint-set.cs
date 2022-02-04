@@ -82,23 +82,6 @@ namespace DisjointSet
                 else if (input[0] == "get")
                     djs.GetRoot(Convert.ToInt32(input[1]));
             }
-            /*
-            djs.UnionSet(1, 2);
-            djs.UnionSet(1, 3);
-            djs.UnionSet(1, 4);
-            
-            djs.GetRoot(4);
-            djs.GetRoot(1);
-
-            djs.UnionSet(5, 6);
-            
-            djs.GetRoot(6);
-            
-            djs.UnionSet(1, 5);
-
-            djs.GetRoot(5);
-            djs.GetRoot(1);
-            */
         }
     }
 }
