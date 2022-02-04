@@ -9,13 +9,13 @@ It has data structure and some sorting implementations in several languages. Cur
 * C
 * C++
 * C#
+* JavaScript
 * Python
 * Visual BASIC .NET (Auto conversion from C#)
 
 ### In Future
 * Go
 * Java
-* JavaScript
 * Rust
 * TypeScript
 
@@ -23,6 +23,7 @@ It has data structure and some sorting implementations in several languages. Cur
 
 ### Data Structure
 * Doubly Linked List
+* Disjoint Set
 * Heap (Array based; Max and min heap)
 * Singly Linked List
 * Stack (Linked List based)
@@ -101,6 +102,6 @@ Use Issue tracker in GitHub repository for any trouble or implementation request
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Feb 1, 2022
+Created: Nov 6, 2021 | Last Modified: Feb 4, 2022
 
 Copyright © 2021-2022 Capella87. Licensed under MIT License.
