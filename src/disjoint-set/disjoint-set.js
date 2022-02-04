@@ -46,6 +46,7 @@ get_root(arr, 1);
 get_root(arr, 5);
 
 /*
+Output:
 Set 1's root is 1.
 Set 2's root is 1.
 Set 4's root is 1.
