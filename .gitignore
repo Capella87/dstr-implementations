@@ -1,5 +1,8 @@
 *.exe
-*.out
+*.ilk
 *.in
+*.obj
+*.out
+*.pdb
 bin/
 obj/
