@@ -32,6 +32,7 @@ It has data structure and some sorting implementations in several languages. Cur
 ### Graph
 * Breadth-First Search
 * Depth-First Search
+* Topological Sort
 * Undirected Graph
 
 ### Search
@@ -85,7 +86,6 @@ It has data structure and some sorting implementations in several languages. Cur
 * Red-Black Tree
 * Binomial Heap
 * Comb Sort
-* Topological Sort
 * Library Sort
 * Patience Sort
 * Smoothsort
@@ -102,6 +102,6 @@ Use Issue tracker in GitHub repository for any trouble or implementation request
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Feb 4, 2022
+Created: Nov 6, 2021 | Last Modified: Feb 13, 2022
 
 Copyright © 2021-2022 Capella87. Licensed under MIT License.
