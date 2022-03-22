@@ -28,7 +28,7 @@ namespace ISort
             }
         }
 
-        public void PrintArr()
+        public void PrintArray()
         {
             foreach (int t in _numArr)
                 Console.Write($"{t} ");
@@ -43,9 +43,9 @@ namespace ISort
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             ISort n = new();
-            n.PrintArr();
+            n.PrintArray();
             n.InsertionSort();
-            n.PrintArr();
+            n.PrintArray();
         }
     }
 }
