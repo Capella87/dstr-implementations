@@ -2,24 +2,29 @@ using System;
 
 namespace HSort
 {
-    public class HSort
+    public class HSort<T> where T : IComparable<T>
     {
-        private int[] _numArr;
+        private T[] _numArr;
         private int _arrSize;
-        
+
         public HSort()
         {
             string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             _arrSize = input.Length;
-            _numArr = new int[_arrSize];
+            _numArr = new T[_arrSize];
             for (int i = 0; i < _arrSize; i++)
-                _numArr[i] = Convert.ToInt32(input[i]);
+                _numArr[i] = ParseType(input[i]);
+        }
+
+        private static T ParseType(object target)
+        {
+            return (T)Convert.ChangeType(target, typeof(T));
         }
 
         private void Swap(int dest, int src)
         {
-            int temp = _numArr[dest];
+            T temp = _numArr[dest];
             _numArr[dest] = _numArr[src];
             _numArr[src] = temp;
         }
@@ -30,9 +35,9 @@ namespace HSort
             int left = tIdx * 2 + 1;
             int right = tIdx * 2 + 2;
 
-            if (left < size && _numArr[left] > _numArr[largest])
+            if (left < size && _numArr[left].CompareTo(_numArr[largest]) > 0)
                 largest = left;
-            if (right < size && _numArr[right] > _numArr[largest])
+            if (right < size && _numArr[right].CompareTo(_numArr[largest]) > 0)
                 largest = right;
             if (tIdx != largest)
             {
@@ -55,18 +60,18 @@ namespace HSort
 
         public void PrintArray()
         {
-            foreach (int i in _numArr)
+            foreach (var i in _numArr)
                 Console.Write($"{i} ");
             Console.WriteLine();
         }
     }
 
-    public class Program
+    public static class Program
     {
         static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            HSort n = new();
+            var n = new HSort<int>();
             n.PrintArray();
             n.HeapSort();
             n.PrintArray();
