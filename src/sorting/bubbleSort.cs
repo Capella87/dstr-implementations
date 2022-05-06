@@ -1,54 +1,41 @@
 using System;
+using Sorting;
 
-namespace BSort
+namespace BubbleSort
 {
-    public class BSort
+    public class BubbleSort<T> : Sorting<T> where T : IComparable<T>
     {
-        private int[] _numArr;
-        private int _arrSize;
-
-        public BSort()
+        public BubbleSort()
         {
-            string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            _arrSize = input.Length;
-
-            _numArr = new int[_arrSize];
-            for (int i = 0; i < _arrSize; i++)
-                _numArr[i] = Convert.ToInt32(input[i]);
+            _arr = Array.ConvertAll<string, T>(Console.ReadLine().Split(' ',
+            StringSplitOptions.RemoveEmptyEntries), ParseType);
+            _count = _arr.Length;
         }
 
-        private void Swap(int idx1, int idx2)
+        public BubbleSort(T[] input)
         {
-            int temp = _numArr[idx1];
-            _numArr[idx1] = _numArr[idx2];
-            _numArr[idx2] = temp;
+            _arr = input;
+            _count = _arr.Length;
         }
 
-        public void bubbleSort()
+        public override void Sort()
         {
-            for (int i = 0; i < _arrSize - 1; i++)
-                for (int j = 0; j < _arrSize - 1 - i; j++)
-                    if (_numArr[j] > _numArr[j + 1])
+            for (int i = 0; i < _count - 1; i++)
+            {
+                for (int j = 0; j < _count - 1 - i; j++)
+                    if (_arr[j].CompareTo(_arr[j + 1]) > 0) // _arr[j] is bigger than _arr[j + 1];
                         Swap(j, j + 1);
-        }
-
-        public void PrintArray()
-        {
-            foreach (int i in _numArr)
-                Console.Write($"{i} ");
-            Console.WriteLine();
+            }
         }
     }
-
-    public class Program
+    public static class Program
     {
-        static void Main()
+        public static void Main()
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            BSort b = new();
-            b.PrintArray();
-            b.bubbleSort();
-            b.PrintArray();
+            var a = new BubbleSort<int>();
+            a.PrintArray();
+            a.Sort();
+            a.PrintArray();
         }
     }
 }

@@ -1,61 +1,58 @@
 using System;
+using Sorting;
 
-namespace MSort
+namespace MergeSort
 {
-    public class MSort
+    public class MergeSort<T> : Sorting<T> where T : IComparable<T>
     {
-        private int[] _targetArr;
-        private int[] _targetBuffer;
-        private int _arrSize;
+        private T[] _buffer;
 
-        public void MergeSort(int left, int right)
+        public MergeSort()
+        {
+            _arr = Array.ConvertAll<string, T>(Console.ReadLine().Split(' ',
+            StringSplitOptions.RemoveEmptyEntries), ParseType);
+            _count = _arr.Length;
+            _buffer = new T[_count];
+        }
+
+        public MergeSort(T[] input)
+        {
+            _arr = input;
+            _count = _arr.Length;
+            _buffer = new T[_count];
+        }
+
+        private void MSort(int left, int right)
         {
             if (left >= right) return;
+
             int mid = (left + right) / 2;
 
-            // Divide
-            MergeSort(left, mid);
-            MergeSort(mid + 1, right);
+            MSort(left, mid);
+            MSort(mid + 1, right);
 
-            // Conquer
-            int i = left, j = mid + 1;
-            var k = left;
+            int leftIdx = left, rightIdx = mid + 1;
+            int bufIdx = left;
 
-            while (i <= mid && j <= right)
+            while (leftIdx <= mid && rightIdx <= right)
             {
-                if (_targetArr[i] < _targetArr[j])
-                    _targetBuffer[k++] = _targetArr[i++];
-                else _targetBuffer[k++] = _targetArr[j++];
+                if (_arr[leftIdx].CompareTo(_arr[rightIdx]) < 0) // _arr[rightIdx] is bigger than _arr[leftIdx]
+                    _buffer[bufIdx++] = _arr[leftIdx++];
+                else _buffer[bufIdx++] = _arr[rightIdx++];
             }
-            while (i <= mid)
-                _targetBuffer[k++] = _targetArr[i++];
-            while (j <= right)
-                _targetBuffer[k++] = _targetArr[j++];
-            for (var l = left; l <= right; l++)
-                _targetArr[l] = _targetBuffer[l];
+            while (leftIdx <= mid)
+                _buffer[bufIdx++] = _arr[leftIdx++];
+            while (rightIdx <= right)
+                _buffer[bufIdx++] = _arr[rightIdx++];
+            for (int i = left; i <= right; i++)
+                _arr[i] = _buffer[i];
+
             return;
         }
 
-        public void PrintArray()
+        public override void Sort()
         {
-            for (var i = 0; i < this._arrSize; i++)
-                Console.Write($"{_targetArr[i]} ");
-            Console.WriteLine();
-        }
-
-        public int GetSize()
-        {
-            return _arrSize;
-        }
-
-        public MSort()
-        {
-            string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            this._arrSize = input.Length; // input count
-            this._targetArr = new int[this._arrSize];
-            this._targetBuffer = new int[this._arrSize];
-            for (var i = 0; i < this._arrSize; i++)
-                _targetArr[i] = Convert.ToInt32(input[i]);
+            MSort(0, _count - 1);
         }
     }
 
@@ -63,10 +60,10 @@ namespace MSort
     {
         public static void Main()
         {
-            MSort m = new();
-            m.PrintArray();
-            m.MergeSort(0, m.GetSize() - 1);
-            m.PrintArray();
+            var a = new MergeSort<int>();
+            a.PrintArray();
+            a.Sort();
+            a.PrintArray();
         }
     }
 }
