@@ -1,58 +1,45 @@
 using System;
+using Sorting;
 
-namespace SelSort
+namespace SelectionSort
 {
-    class SelSort
+    public class SelectionSort<T> : Sorting<T> where T : IComparable<T>
     {
-        private int[] _numArr;
-        private int _arrSize;
-
-        private void Swap(ref int a, ref int b)
+        public SelectionSort()
         {
-            int temp = a;
-            a = b;
-            b = temp;
+            _arr = Array.ConvertAll<string, T>(Console.ReadLine().Split(' ',
+            StringSplitOptions.RemoveEmptyEntries), ParseType);
+            _count = _arr.Length;
         }
 
-        public SelSort()
+        public SelectionSort(T[] input)
         {
-            string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            _arrSize = input.Length;
-            _numArr = new int[_arrSize];
-            for (int i = 0; i < _arrSize; i++)
-                _numArr[i] = int.Parse(input[i]);
+            _arr = input;
+            _count = _arr.Length;
         }
 
-        public void SelectionSort()
+        public override void Sort()
         {
-            for (int i = 0; i < _arrSize - 1; i++)
+            // Refresh minIdx when _arr[j] < _arr[minIdx]
+            for (int i = 0; i < _count - 1; i++)
             {
                 int minIdx = i;
-                for (int j = i + 1; j < _arrSize; j++)
-                    if (_numArr[j] < _numArr[minIdx])
+                for (int j = i + 1; j < _count; j++)
+                    if (_arr[j].CompareTo(_arr[minIdx]) < 0)
                         minIdx = j;
-                if (minIdx != i)
-                    Swap(ref _numArr[i], ref _numArr[minIdx]);
+                if (minIdx != i) Swap(minIdx, i);
             }
-        }
-
-        public void PrintArray()
-        {
-            foreach (int i in _numArr)
-                Console.Write($"{i} ");
-            Console.WriteLine();
         }
     }
 
-    class MainApp
+    public static class Program
     {
         public static void Main()
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            SelSort s = new();
-            s.PrintArray();
-            s.SelectionSort();
-            s.PrintArray();
+            var a = new SelectionSort<int>();
+            a.PrintArray();
+            a.Sort();
+            a.PrintArray();
         }
     }
 }
