@@ -1,51 +1,48 @@
 using System;
+using Sorting;
 
-namespace ISort
+namespace InsertionSort
 {
-    public class ISort
+    public class InsertionSort<T> : Sorting<T> where T : IComparable<T>
     {
-        private int[] _numArr;
-        private int _arrSize;
-
-        public ISort()
+        public InsertionSort()
         {
-            string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            _arrSize = input.Length;
-            _numArr = new int[_arrSize];
-            for (int i = 0; i < _arrSize; i++)
-                _numArr[i] = int.Parse(input[i]);
+            _arr = Array.ConvertAll<string, T>(Console.ReadLine().Split(' ',
+            StringSplitOptions.RemoveEmptyEntries), ParseType);
+            _count = _arr.Length;
         }
 
-        public void InsertionSort()
+        public InsertionSort(T[] input)
         {
-            for (int i = 1; i < _arrSize; i++)
+            _arr = input;
+            _count = _arr.Length;
+        }
+
+        public override void Sort()
+        {
+            for (int i = 1; i < _count; i++)
             {
-                int temp = _numArr[i];
-                int j = i - 1;
-                for (; j >= 0 && _numArr[j] > temp; j--)
-                    _numArr[j + 1] = _numArr[j];
-                _numArr[j + 1] = temp;
+                int idx = i - 1;
+                T temp = _arr[i];
+                // Move elements in array until the element is smaller than the temp.
+                while (idx >= 0 && temp.CompareTo(_arr[idx]) < 0)
+                {
+                    _arr[idx + 1] = _arr[idx];
+                    idx--;
+                }
+                _arr[idx + 1] = temp;
             }
         }
-
-        public void PrintArray()
-        {
-            foreach (int t in _numArr)
-                Console.Write($"{t} ");
-            Console.WriteLine();
-        }
-
     }
 
-    public class Program
+    public static class Program
     {
-        static void Main()
+        public static void Main()
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            ISort n = new();
-            n.PrintArray();
-            n.InsertionSort();
-            n.PrintArray();
+            var a = new InsertionSort<int>();
+            a.PrintArray();
+            a.Sort();
+            a.PrintArray();
         }
     }
 }
