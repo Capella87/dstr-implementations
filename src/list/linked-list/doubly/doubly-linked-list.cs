@@ -2,22 +2,29 @@ using System;
 
 namespace Doubly
 {
-    public class DoublyList
+    public class DoublyList<T> where T : IComparable<T>
     {
         internal class Node
         {
-            internal int? _data;
+            internal T? _data;
             internal Node? _prev;
             internal Node? _next;
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
             public Node()
             {
-                _data = null;
+                _data = default;
                 _prev = null;
                 _next = null;
             }
 
-            public Node(int data) : this()
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="data">A value to be inserted in the node.</param>
+            public Node(T data) : this()
             {
                 this._data = data;
             }
@@ -27,8 +34,11 @@ namespace Doubly
         private Node _tail;
         private int _size;
 
-        public int size { get => _size; }
+        public int Size { get => _size; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public DoublyList()
         {
             _head = new Node();
@@ -38,8 +48,12 @@ namespace Doubly
             _size = 0;
         }
 
-        // Insert an element behind _head.
-        public bool InsertFront(int d)
+        /// <summary>
+        /// Insert an element behind _head.
+        /// </summary>
+        /// <param name="d">A value to be inserted.</param>
+        /// <returns>Returns true if d is inserted successfully.</returns>
+        public bool InsertFront(T d)
         {
             var newNode = new Node(d);
 
@@ -52,8 +66,12 @@ namespace Doubly
             return true;
         }
 
-        // Insert an element in front of _tail.
-        public bool Append(int d)
+        /// <summary>
+        /// Insert an element in front of _tail.
+        /// </summary>
+        /// <param name="d">A value to be appended.</param>
+        /// <returns>Returns true if d is appended successfully.</returns>
+        public bool Append(T d)
         {
             var newNode = new Node(d);
 
@@ -66,8 +84,13 @@ namespace Doubly
             return true;
         }
 
-        // Insert an element before the target. Find the target first and insert.
-        public bool Insert(int d, int n)
+        /// <summary>
+        /// Insert an element before the target. Find the target first and insert.
+        /// </summary>
+        /// <param name="d">A value to be inserted.</param>
+        /// <param name="n">A target value.</param>
+        /// <returns>Returns true if d is inserted successfully.</returns>
+        public bool Insert(T d, T n)
         {
             Node? t = SearchNode(n);
             if (t == null) return false;
@@ -82,7 +105,10 @@ namespace Doubly
             return true;
         }
 
-        // Traverse from _head to _tail. Returns false if the list is empty.
+        /// <summary>
+        /// Traverse from _head to _tail.
+        /// </summary>
+        /// <returns>Returns false if the list is empty.</returns>
         public bool FrontTraverse()
         {
             if (_size == 0)
@@ -101,8 +127,11 @@ namespace Doubly
             return true;
         }
 
-        // Traverse from _head to _tail. Returns false if the list is vacant.
-        public bool BackTraverse() 
+        /// <summary>
+        /// Traverse from _head to _tail.
+        /// </summary>
+        /// <returns>Returns false if the list is empty.</returns>
+        public bool BackTraverse()
         {
             if (_size == 0)
             {
@@ -120,7 +149,10 @@ namespace Doubly
             return true;
         }
 
-        // Remove the first element from the list.
+        /// <summary>
+        /// Remove the first element from the list.
+        /// </summary>
+        /// <returns>Returns false if the list is empty.</returns>
         public bool RemoveFront()
         {
             if (_size == 0)
@@ -142,7 +174,10 @@ namespace Doubly
             return false;
         }
 
-        // Remove the last element from the list.
+        /// <summary>
+        /// Remove the last element from the list.
+        /// </summary>
+        /// <returns>Returns false if the list is empty.</returns>
         public bool RemoveLast()
         {
             if (_size == 0)
@@ -164,8 +199,12 @@ namespace Doubly
             return false;
         }
 
-        // Find the first element of target and get rid of it from the list. Takes O(n)
-        public bool Remove(int target)
+        /// <summary>
+        /// Find the first element of target and get rid of it from the list. O(n) time complexity.
+        /// </summary>
+        /// <param name="target">A target value to be removed.</param>
+        /// <returns>Returns false if the target is not in the list or the list is empty.</returns>
+        public bool Remove(T target)
         {
             if (_size == 0)
             {
@@ -185,8 +224,12 @@ namespace Doubly
             return false;
         }
 
-        // Search a query from the first to the last. O(n)
-        private Node? SearchNode(int query)
+        /// <summary>
+        /// Search a target from the first to the last. O(n) time complexity.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns>Returns null if the list is empty or the target is not in the list.</returns>
+        private Node? SearchNode(T target)
         {
             if (_size == 0)
             {
@@ -197,7 +240,7 @@ namespace Doubly
             Node? cur = _head._next;
             while (cur != null && cur != _tail)
             {
-                if (cur != null && cur._data == query)
+                if (cur._data != null && cur._data.Equals(target))
                     return cur;
                 cur = cur._next;
             }
@@ -205,8 +248,12 @@ namespace Doubly
             return null;
         }
 
-        // Search a query from the last to the first. O(n)
-        private Node? SearchNodeLast(int query)
+        /// <summary>
+        /// Search a target from the last to the first. O(n) time complexity.
+        /// </summary>
+        /// <param name="target">A target value to be found.</param>
+        /// <returns>Returns false if the list is empty or the target is not in the list.</returns>
+        private Node? SearchNodeLast(T target)
         {
             if (_size == 0)
             {
@@ -217,7 +264,7 @@ namespace Doubly
             Node? cur = _tail._prev;
             while (cur != null && cur != _head)
             {
-                if (cur != null && cur._data == query)
+                if (cur._data != null && cur._data.Equals(target))
                     return cur;
                 cur = cur._prev;
             }
@@ -225,34 +272,42 @@ namespace Doubly
             return null;
         }
 
-        // Find the query and show a result.
-        public bool Find(int query)
+        /// <summary>
+        /// Find a target and show a result.
+        /// </summary>
+        /// <param name="target">A target value to be found.</param>
+        /// <returns>Returns true if the target is in the list.</returns>
+        public bool Find(T target)
         {
-            Node? hasQuery = SearchNode(query);
+            Node? hasQuery = SearchNode(target);
             if (hasQuery != null)
             {
-                Console.WriteLine($"{query} is exist in the list.");
+                Console.WriteLine($"{target} is exist in the list.");
                 return true;
             }
             else
             {
-                Console.WriteLine($"{query} is NOT exist in the list.");
+                Console.WriteLine($"{target} is NOT exist in the list.");
                 return false;
             }
         }
 
-        // Find the query and show a result. Traverse from the last.
-        public bool FindLast(int query)
+        /// <summary>
+        /// Find the target and show a result. Traverse from the last element.
+        /// </summary>
+        /// <param name="target">A target value to be found.</param>
+        /// <returns>Returns true if the target is in the list.</returns>
+        public bool FindLast(T target)
         {
-            Node? hasQuery = SearchNodeLast(query);
+            Node? hasQuery = SearchNodeLast(target);
             if (hasQuery != null)
             {
-                Console.WriteLine($"{query} is exist in the list.");
+                Console.WriteLine($"{target} is exist in the list.");
                 return true;
             }
             else
             {
-                Console.WriteLine($"{query} is NOT exist in the list.");
+                Console.WriteLine($"{target} is NOT exist in the list.");
                 return false;
             }
         }
@@ -262,7 +317,7 @@ namespace Doubly
     {
         public static void Main()
         {
-            DoublyList dl = new DoublyList();
+            var dl = new DoublyList<int>();
 
             dl.InsertFront(1);
             dl.InsertFront(2);
@@ -289,7 +344,7 @@ namespace Doubly
             dl.RemoveLast();
             dl.FrontTraverse();
 
-            Console.WriteLine($"There are {dl.size} entries in the list.");
+            Console.WriteLine($"There are {dl.Size} entries in the list.");
 
             // Search 1 and 4.
             dl.Find(1);
