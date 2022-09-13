@@ -5,5 +5,7 @@
 *.obj
 *.out
 *.pdb
+*.un~
+*.*~
 bin/
 obj/
