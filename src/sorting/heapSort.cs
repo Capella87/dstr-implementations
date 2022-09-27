@@ -1,32 +1,21 @@
 using System;
+using Sorting;
 
-namespace HSort
+namespace HeapSort
 {
-    public class HSort<T> where T : IComparable<T>
+    public class HeapSort<T> : Sorting<T> where T : IComparable<T>
     {
-        private T[] _numArr;
-        private int _arrSize;
-
-        public HSort()
+        public HeapSort()
         {
-            string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            _arrSize = input.Length;
-            _numArr = new T[_arrSize];
-            for (int i = 0; i < _arrSize; i++)
-                _numArr[i] = ParseType(input[i]);
+            _arr = Array.ConvertAll<string, T>(Console.ReadLine().Split(' ', 
+            StringSplitOptions.RemoveEmptyEntries), ParseType);
+            _count = _arr.Length;
         }
 
-        private static T ParseType(object target)
+        public HeapSort(T[] input)
         {
-            return (T)Convert.ChangeType(target, typeof(T));
-        }
-
-        private void Swap(int dest, int src)
-        {
-            T temp = _numArr[dest];
-            _numArr[dest] = _numArr[src];
-            _numArr[src] = temp;
+            _arr = input;
+            _count = input.Length;
         }
 
         private void Heapify(int size, int tIdx)
@@ -35,34 +24,28 @@ namespace HSort
             int left = tIdx * 2 + 1;
             int right = tIdx * 2 + 2;
 
-            if (left < size && _numArr[left].CompareTo(_numArr[largest]) > 0)
+            if (left < size && _arr[left].CompareTo(_arr[largest]) > 0)
                 largest = left;
-            if (right < size && _numArr[right].CompareTo(_numArr[largest]) > 0)
+            if (right < size && _arr[right].CompareTo(_arr[largest]) > 0)
                 largest = right;
-            if (tIdx != largest)
+
+            if (largest != tIdx)
             {
-                Swap(tIdx, largest);
+                Swap(largest, tIdx);
                 Heapify(size, largest);
             }
             return;
         }
 
-        public void HeapSort()
+        public override void Sort()
         {
-            for (int i = _arrSize / 2 - 1; i >= 0; i--)
-                Heapify(_arrSize, i);
-            for (int i = _arrSize - 1; i >= 0; i--)
+            for (int i = _count / 2 - 1; i >= 0; i--)
+                Heapify(_count, i);
+            for (int i = _count - 1; i >= 0; i--)
             {
                 Swap(0, i);
                 Heapify(i, 0);
             }
-        }
-
-        public void PrintArray()
-        {
-            foreach (var i in _numArr)
-                Console.Write($"{i} ");
-            Console.WriteLine();
         }
     }
 
@@ -71,9 +54,9 @@ namespace HSort
         static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            var n = new HSort<int>();
+            var n = new HeapSort<int>();
             n.PrintArray();
-            n.HeapSort();
+            n.Sort();
             n.PrintArray();
         }
     }

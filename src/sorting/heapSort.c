@@ -20,17 +20,25 @@ void heapify(int* arr, int size, int t_idx)
     return;
 }
 
-void heap_sort(int* arr, const int size)
+void build_heap(int* arr, const int size)
 {
     for (int i = size / 2 - 1; i >= 0; i--) // 가장 나중에 있는 internal node부터 루트 노드까지 차례차례 heapify한다.
         heapify(arr, size, i);
+}
 
+void remove_heap(int* arr, const int size)
+{
     for (int i = size - 1; i >= 0; i--) // 일반 heap의 dequeue에 해당된다.
     {
         swap(&arr[0], &arr[i]); // 루트 노드에 있는 것을 꺼내 맨 뒤로 이동시킨다. (heap의 크기는 1씩 줄어든다.)
         heapify(arr, i, 0); // 힙 재구성
     }
-    return;
+}
+
+void heap_sort(int* arr, const int size)
+{
+    build_heap(arr, size);
+    remove_heap(arr, size);
 }
 
 int main(void)
