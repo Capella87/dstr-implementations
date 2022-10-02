@@ -48,7 +48,7 @@ void bind_node(node* before, node* target, node* after)
 // Separate the target node from the list and return it
 node* separate_node(node* before, node* target, node* after)
 {
-    if (target) return NULL;
+    if (!target) return NULL;
 
     if (before)
         before->next = after;
