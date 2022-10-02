@@ -46,14 +46,14 @@ void bind_node(node* before, node* target, node* after)
 }
 
 // Separate the target node from the list and return it
-node* separate_node(node* before, node* target, node* next)
+node* separate_node(node* before, node* target, node* after)
 {
-    if (!target) return NULL;
+    if (target) return NULL;
 
     if (before)
-        before->next = next;
-    if (next)
-        next->prev = before;
+        before->next = after;
+    if (after)
+        after->prev = before;
 
     target->prev = target->next = NULL;
 
@@ -181,7 +181,7 @@ void insert_after_node(list** lst, node* n, int idx)
 // Get rid of the first node from the list and return its value
 int pop_front(list** lst)
 {
-    if (!(*lst)->count)
+    if (is_empty(*lst))
     {
         printf("No element in the list.\n");
         return -1;
@@ -198,7 +198,7 @@ int pop_front(list** lst)
 // Get rid of the first node from the list and return it
 node* pop_node_front(list** lst)
 {
-    if (!(*lst)->count)
+    if (is_empty(*lst))
     {
         printf("No element in the list.\n");
         return NULL;
@@ -212,7 +212,7 @@ node* pop_node_front(list** lst)
 // Get rid of the last node from the list and return its value
 int pop_back(list** lst)
 {
-    if (!(*lst)->count)
+    if (is_empty(*lst))
     {
         printf("No element in the list.\n");
         return -1;
@@ -228,7 +228,7 @@ int pop_back(list** lst)
 // Get rid of the last node from the list and return it
 node* pop_node_back(list** lst)
 {
-    if (!(*lst)->count)
+    if (is_empty(*lst))
     {
         printf("No element in the list.\n");
         return -1;
@@ -276,7 +276,7 @@ node* pop_node_at(list** lst, int idx)
 // Traverse all elements in the list from the header node
 void traverse_all_nodes(list* lst)
 {
-    if (!lst->count)
+    if (is_empty(lst))
     {
         printf("No element in the list.\n");
         return;
@@ -294,7 +294,7 @@ void traverse_all_nodes(list* lst)
 // Traverse all elements in the list from the trailer node
 void traverse_all_nodes_reversed(list* lst)
 {
-    if (!lst->count)
+    if (is_empty(lst))
     {
         printf("No element in the list.\n");
         return;
@@ -309,27 +309,10 @@ void traverse_all_nodes_reversed(list* lst)
     putchar('\n');
 }
 
-// Get element at idx in the list
-int get_at(list* lst, int idx)
-{
-    if (idx > lst->count || idx < 0)
-    {
-        printf("Invalid index number - idx exceeds the element count.\n");
-        return NULL;
-    }
-    else if (idx == lst->count) return lst->trailer;
-
-    node* cur = lst->header->next;
-    for (int i = 0; i < idx; i++)
-        cur = cur->next;
-
-    return cur->data;
-}
-
 // Find first occurrence
 node* find_node(list* lst, int data)
 {
-    if (!lst->count)
+    if (is_empty(lst))
     {
         printf("No element in the list.\n");
         return NULL;
@@ -349,7 +332,7 @@ node* find_node(list* lst, int data)
 // Find last occurrence
 node* find_last_node(list* lst, int data)
 {
-    if (!lst->count)
+    if (is_empty(lst))
     {
         printf("No element in the list.\n");
         return NULL;
@@ -364,6 +347,23 @@ node* find_last_node(list* lst, int data)
     }
 
     return cur == lst->header ? NULL : cur;
+}
+
+// Get element at idx in the list
+int get_at(list* lst, int idx)
+{
+    if (idx > lst->count || idx < 0)
+    {
+        printf("Invalid index number - idx exceeds the element count.\n");
+        return NULL;
+    }
+    else if (idx == lst->count) return lst->trailer;
+
+    node* cur = lst->header->next;
+    for (int i = 0; i < idx; i++)
+        cur = cur->next;
+
+    return cur->data;
 }
 
 // Get node at idx
@@ -388,6 +388,11 @@ void free_all(list* lst)
     while (lst->count)
         pop_front(&lst);
     free(lst);
+}
+
+bool is_empty(list* lst)
+{
+    return lst->count ? false : true;
 }
 
 // Driver main code

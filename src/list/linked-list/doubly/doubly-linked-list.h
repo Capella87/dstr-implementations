@@ -29,7 +29,7 @@ void add_front(list** lst, int data);
 void add_node_front(list** lst, node* n);
 void append(list** lst, int data);
 void append_node(list** lst, node* n);
-void insert(list** list, int data, int idx);
+void insert(list** lst, int data, int idx);
 void insert_node(list** lst, node* n, int idx);
 void insert_after(list** lst, int data, int target);
 void insert_after_node(list** lst, node* n, int target);
@@ -49,6 +49,8 @@ node* find_last_node(list* lst, int data);
 
 int get_at(list* lst, int idx);
 node* get_node_at(list* lst, int idx);
+
+bool is_empty(list* lst);
 
 void free_all(list* lst);
 
