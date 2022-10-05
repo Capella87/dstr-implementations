@@ -205,6 +205,7 @@ node* pop_node_front(list** lst)
     }
 
     node* rt = separate_node((*lst)->header, (*lst)->header->next, (*lst)->header->next->next);
+    (*lst)->count--;
 
     return rt;
 }
@@ -219,6 +220,7 @@ int pop_back(list** lst)
     }
 
     node* target = separate_node((*lst)->trailer->prev->prev, (*lst)->trailer->prev, (*lst)->trailer);
+    (*lst)->count--;
     int rt = target->data;
 
     free(target);
@@ -235,6 +237,7 @@ node* pop_node_back(list** lst)
     }
 
     node* target = separate_node((*lst)->trailer->prev->prev, (*lst)->trailer->prev, (*lst)->trailer);
+    (*lst)->count--;
 
     return target;
 }
