@@ -1,75 +1,74 @@
-using System;
+using Sorting;
 
 namespace QuSort
 {
-    public class QuSort
+    public class QuickSort<T> : Sorting<T> where T : IComparable<T>
     {
-        private int[] _numArr;
-        private int _arrSize;
-
-        private void Swap(ref int a, ref int b)
+        public QuickSort()
         {
-            int temp = a;
-            a = b;
-            b = temp;
+            _arr = Array.ConvertAll<string, T>(Console.ReadLine().Split(' ',
+            StringSplitOptions.RemoveEmptyEntries), ParseType);
+            _count = _arr.Length;
         }
 
-        private int Partition(int left, int right)
+        public QuickSort(T[] input)
         {
-            int pivot = _numArr[left];
-            int low = left + 1;
-            int high = right;
+            _arr = input;
+            _count = _arr.Length;
+        }
 
-            while (low <= high)
+        private int GetPivot(int left, int right)
+        {
+            var rand = new Random();
+
+            return rand.Next(left, right + 1);
+        }
+
+        private int Partition(int left, int right, int pivotIdx)
+        {
+            if (pivotIdx != right) Swap(pivotIdx, right);
+
+            ref T pivot = ref _arr[right];
+            int i = left, j = right - 1;
+
+            while (i <= j)
             {
-                while (low <= right && pivot > _numArr[low])
-                    low++;
-                while (high > left && pivot < _numArr[high])
-                    high--;
-                if (low <= high) Swap(ref _numArr[low], ref _numArr[high]);
+                while (i <= j && pivot.CompareTo(_arr[i]) >= 0)
+                    i++;
+                while (i <= j && pivot.CompareTo(_arr[j]) <= 0)
+                    j--;
+                if (i < j) Swap(i, j);
             }
-            Swap(ref _numArr[left], ref _numArr[high]);
-            return high;
+            Swap(right, i);
+
+            return i;
         }
 
-        public void QuickSort(int left, int right)
+        private void QuSort(int left, int right)
         {
-            if (left > right) return;
-            int pivotIdx = Partition(left, right);
-            QuickSort(left, pivotIdx - 1);
-            QuickSort(pivotIdx + 1, right);
+            if (left >= right) return;
+
+            int pivotIdx = GetPivot(left, right);
+
+            pivotIdx = Partition(left, right, pivotIdx);
+            QuSort(left, pivotIdx - 1);
+            QuSort(pivotIdx + 1, right);
         }
 
-        public int GetSize()
+        public override void Sort()
         {
-            return _arrSize;
-        }
-
-        public void PrintArray()
-        {
-            for (int i = 0; i < _arrSize; i++)
-                Console.Write($"{_numArr[i]} ");
-            Console.WriteLine();
-        }
-
-        public QuSort()
-        {
-            string[] input = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            _arrSize = input.Length;
-            _numArr = new int[_arrSize];
-            for (int i = 0; i < _arrSize; i++)
-                _numArr[i] = int.Parse(input[i]);
+            QuSort(0, _count - 1);
         }
     }
 
-    public class MainApp
+    public static class Program
     {
         public static void Main()
         {
-            QuSort q = new();
-            q.PrintArray();
-            q.QuickSort(0, q.GetSize() - 1);
-            q.PrintArray();
+            var a = new QuickSort<int>();
+            a.PrintArray();
+            a.Sort();
+            a.PrintArray();
         }
     }
 }

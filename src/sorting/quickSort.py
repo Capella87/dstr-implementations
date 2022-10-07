@@ -1,38 +1,56 @@
-def partition(arr, left, right):
-    pivot = arr[left]
-    low = left + 1
-    high = right
+import secrets
+from sys import stdin
 
-    while low <= high:
-        while low <= right and pivot > arr[low]:
-            low += 1
-        while high > left and pivot < arr[high]:
-            high -= 1
-        if (low <= high):
-            arr[low], arr[high] = arr[high], arr[low]
-    arr[left], arr[high] = arr[high], arr[left]
-    return high
+rand_generator = secrets.SystemRandom()
 
 
-def quick_sort(arr, left, right):
-    if left > right:
+def get_pivot_idx(begin: int, end: int) -> int:
+    return rand_generator.randint(begin, end)
+
+
+def partition(arr: list, left: int, right: int, pivot_idx: int) -> int:
+    pivot = arr[pivot_idx]
+    arr[pivot_idx], arr[right] = arr[right], arr[pivot_idx]
+    i = left
+    j = right - 1
+
+    while i <= j:
+        while i <= j and arr[i] <= pivot:
+            i += 1
+        while i <= j and pivot <= arr[j]:
+            j -= 1
+        if i < j:
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i], arr[right] = arr[right], arr[i]
+
+    return i
+
+
+def quick_sort(arr: list, left: int, right: int) -> None:
+    if left >= right:
         return
-    pivot_idx = partition(arr, left, right)
+    pivot_idx = get_pivot_idx(left, right)
+
+    pivot_idx = partition(arr, left, right, pivot_idx)
     quick_sort(arr, left, pivot_idx - 1)
     quick_sort(arr, pivot_idx + 1, right)
 
 
-def print_array(arr, n):
-    for i in range(n):
-        print(arr[i], end=' ')
+def print_array(arr: list) -> None:
+    for i in arr:
+        print(' %d' % i, end='')
     print()
 
 
-arr = list(map(int, input().split()))
-size = len(arr)
-print_array(arr, size)
-quick_sort(arr, 0, size - 1)
-print_array(arr, size)
+def get_list() -> list:
+    return list(map(int, stdin.readline().split(' ')))
+
+
+lst = get_list()
+print_array(lst)
+quick_sort(lst, 0, len(lst) - 1)
+print_array(lst)
+
 
 '''
 Input:
