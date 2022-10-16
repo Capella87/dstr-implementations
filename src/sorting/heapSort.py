@@ -1,18 +1,18 @@
-def heapify(arr, n, t_idx):
+def heapify(arr: list, n: int, t_idx: int) -> None:
     largest = t_idx
-    left = t_idx * 2 + 1
-    right = t_idx * 2 + 2
+    child_idx = t_idx * 2 + 1
 
-    if left < n and arr[largest] < arr[left]:
-        largest = left
-    if right < n and arr[largest] < arr[right]:
-        largest = right
+    if child_idx < n and arr[largest] < arr[child_idx]:
+        largest = child_idx
+    child_idx += 1
+    if child_idx < n and arr[largest] < arr[child_idx]:
+        largest = child_idx
     if largest != t_idx:
         arr[largest], arr[t_idx] = arr[t_idx], arr[largest]
         heapify(arr, n, largest)
 
 
-def heap_sort(arr, n):
+def heap_sort(arr: list, n: int) -> None:
     for i in range(n // 2 - 1, -1, -1):
         heapify(arr, n, i)
     for i in range(n - 1, -1, -1):
@@ -20,7 +20,7 @@ def heap_sort(arr, n):
         heapify(arr, i, 0)
 
 
-def print_array(arr, size):
+def print_array(arr: list, size: int) -> None:
     for i in range(0, size):
         print(arr[i], end=' ')
     print()

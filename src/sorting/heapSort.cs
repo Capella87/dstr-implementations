@@ -37,15 +37,25 @@ namespace HeapSort
             return;
         }
 
-        public override void Sort()
+        private void MakeHeap()
         {
             for (int i = _count / 2 - 1; i >= 0; i--)
                 Heapify(_count, i);
+        }
+
+        private void RemoveHeap()
+        {
             for (int i = _count - 1; i >= 0; i--)
             {
                 Swap(0, i);
                 Heapify(i, 0);
             }
+        }
+
+        public override void Sort()
+        {
+            MakeHeap();
+            RemoveHeap();
         }
     }
 
