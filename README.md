@@ -1,4 +1,4 @@
-# Dstr-Implementation : A Data Structure Implementation
+# Dstr-Implementations : A Collection of Data Structure Implementations
 
 ## What's This?
 It has data structure and some sorting implementations in several languages. Currently I wrote in C, C++, C# and Python. More languages such as Java, Go and more in future.
@@ -96,12 +96,15 @@ It has data structure and some sorting implementations in several languages. Cur
 * B- Tree
 * B+ Tree
 
+## Disclaimer
+
+Please Do NOT copy and submit source code in this repository directly to your assignment, practice session or exams. I don't have any responsibilities for any disadvantages after ignoring this disclaimer.
 
 ## Feedback
 Use Issue tracker in GitHub repository for any trouble or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: March 5, 2022
+Created: Nov 6, 2021 | Last Modified: Oct 18, 2022
 
 Copyright © 2021-2022 Capella87. Licensed under MIT License.
