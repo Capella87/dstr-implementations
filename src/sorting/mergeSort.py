@@ -1,4 +1,4 @@
-def merge_sort(arr):
+def merge_sort(arr: list) -> None:
     if len(arr) <= 1:
         return
 
@@ -30,10 +30,9 @@ def merge_sort(arr):
         arr[k] = right[j]
         j += 1
         k += 1
-    return
 
 
-def print_array(arr, size):
+def print_array(arr: list, size: int) -> None:
     for i in range(0, size):
         print(arr[i], end=' ')
     print()
@@ -41,10 +40,8 @@ def print_array(arr, size):
 
 arr = list(map(int, input().split()))
 size = len(arr)
-print("Before : ", end=' ')
 print_array(arr, size)
 merge_sort(arr)
-print("After  : ", end=' ')
 print_array(arr, size)
 
 '''

@@ -1,4 +1,4 @@
-def shell_sort(arr, n):
+def shell_sort(arr: list, n: int) -> None:
     interval = n // 2
     while interval > 0:
         for i in range(interval, n):
@@ -11,7 +11,7 @@ def shell_sort(arr, n):
         interval //= 2
 
 
-def print_array(arr, n):
+def print_array(arr: list, n: int) -> None:
     for i in range(0, n):
         print(arr[i], end=' ')
     print()

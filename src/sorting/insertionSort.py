@@ -1,4 +1,4 @@
-def insertion_sort(arr, size):
+def insertion_sort(arr: list, size: int) -> None:
     for i in range(1, size):
         temp = arr[i]
         j = i - 1
@@ -8,7 +8,7 @@ def insertion_sort(arr, size):
         arr[j + 1] = temp
 
 
-def print_array(arr, size):
+def print_array(arr: list, size: int) -> None:
     for i in range(0, size):
         print(arr[i], end=' ')
     print()

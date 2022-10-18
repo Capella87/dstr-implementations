@@ -1,4 +1,4 @@
-def cocktail_sort(arr, size):
+def cocktail_sort(arr: list, size: int) -> None:
     r = size // 2
     is_swapped = False
 
@@ -15,7 +15,7 @@ def cocktail_sort(arr, size):
             break
 
 
-def print_array(arr, size):
+def print_array(arr: list, size: int) -> None:
     for i in range(size):
         print(arr[i], end=' ')
     print()
