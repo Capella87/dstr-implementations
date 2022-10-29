@@ -52,7 +52,7 @@ int detree(node** root, node* parent, int target)
             node* successor = (cur == (*root)->left) ? (*root)->right : (*root)->left;
             if (successor) successor->parent = (*root)->parent;
             free(*root);
-            (*root) = successor;
+            *root = successor;
         }
         else // The node has two children
         {
@@ -77,30 +77,30 @@ void traversal(node* root, void (*method)(node*)) // function pointer
     putchar('\n');
 }
 
-void inorder_traversal(node* root)
+void inorder(node* root)
 {
     if (!root) return;
 
-    if (root->left) inorder_traversal(root->left);
+    if (root->left) inorder(root->left);
     printf("%d ", root->data);
-    if (root->right) inorder_traversal(root->right);
+    if (root->right) inorder(root->right);
 }
 
-void preorder_traversal(node* root)
+void preorder(node* root)
 {
     if (!root) return;
 
     printf("%d ", root->data);
-    if (root->left) preorder_traversal(root->left);
-    if (root->right) preorder_traversal(root->right);
+    if (root->left) preorder(root->left);
+    if (root->right) preorder(root->right);
 }
 
-void postorder_traversal(node* root)
+void postorder(node* root)
 {
     if (!root) return;
 
-    if (root->left) postorder_traversal(root->left);
-    if (root->right) postorder_traversal(root->right);
+    if (root->left) postorder(root->left);
+    if (root->right) postorder(root->right);
     printf("%d ", root->data);
 }
 
@@ -121,20 +121,20 @@ int main(void)
     insert(&root, NULL, 87);
     insert(&root, NULL, 124);
     insert(&root, NULL, 523);
-    traversal(root, inorder_traversal);
+    traversal(root, inorder);
 
     detree(&root, NULL, 123);
-    traversal(root, inorder_traversal);
+    traversal(root, inorder);
     detree(&root, NULL, 2222);
 
     insert(&root, NULL, 89);
     insert(&root, NULL, 88);
     insert(&root, NULL, 91);
-    traversal(root, inorder_traversal);
+    traversal(root, inorder);
     detree(&root, NULL, 89);
-    traversal(root, inorder_traversal);
-    traversal(root, preorder_traversal);
-    traversal(root, postorder_traversal);
+    traversal(root, inorder);
+    traversal(root, preorder);
+    traversal(root, postorder);
 
     free_all(root);
     return 0;
