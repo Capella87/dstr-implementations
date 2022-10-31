@@ -1,4 +1,4 @@
-def union_set(arr, a, b):
+def union_set(arr: list, a: int, b: int) -> bool:
     a_root = find(arr, a)
     b_root = find(arr, b)
 
@@ -13,7 +13,8 @@ def union_set(arr, a, b):
         arr[b_root] = a_root
     return True
 
-def find(arr, target):
+
+def find(arr: list, target: int) -> int:
     if len(arr) <= target: return -1
     elif arr[target] < 0:
         return target
@@ -21,7 +22,8 @@ def find(arr, target):
         arr[target] = find(arr, arr[target])
         return arr[target]
 
-def get_root(arr, target):
+
+def get_root(arr: list, target: int) -> None:
     rt = find(arr, target)
     print('The root of', target, 'is', rt)
 
