@@ -18,7 +18,8 @@ typedef struct tree
     int count;
 } tree;
 
-node* new_node(const int data, bool is_leaf)
+// Create and return a new node
+node* creat_node(const int data, bool is_leaf)
 {
     node* rt = (node*)malloc(sizeof(node));
     rt->left = rt->parent = rt->right = NULL;
@@ -28,54 +29,67 @@ node* new_node(const int data, bool is_leaf)
     return rt;
 }
 
+// Initialize a tree
 tree* init_tree(void)
 {
     tree* rt = (tree*)malloc(sizeof(tree));
-    rt->root = new_node(0, true);
+    rt->root = creat_node(0, true); // Create a leaf node
     rt->count = 0;
     rt->last_node = rt->root;
-    
+
     return rt;
 }
 
-void swap(node** first, node** second)
+// Swap two elements
+void swap(node* first, node* second)
 {
-    int temp = (*first)->data;
-    (*first)->data = (*second)->data;
-    (*second)->data = temp;
+    int temp = first->data;
+    first->data = second->data;
+    second->data = temp;
 }
 
+// Move a node up until reaching a proper place from the bottom
 void up_heap(node* target)
 {
     while (target->parent && target->parent->data < target->data)
     {
-        swap(&target->parent, &target);
+        swap(target->parent, target);
         target = target->parent;
     }
 }
 
+// Move a node down until reaching a proper place from the top
 void down_heap(node* target)
 {
     while (!target->is_leaf)
     {
         node* t = target;
+
+        // Compare to the left child
         if (!target->left->is_leaf && target->left->data > t->data)
             t = target->left;
+
+        // Compare to the right child
         if (!target->right->is_leaf && target->right->data > t->data)
             t = target->right;
+
+        // Swap two values if the node has to be moved
         if (target != t)
         {
-            swap(&t, &target);
+            swap(t, target);
             target = t;
         }
         else break;
     }
 }
 
+// Find the next location to be placed
+// it is used after the new node is placed in the heap
 node* find_location(tree* tree)
 {
     node* pos = tree->last_node;
 
+    // Move up until the node is left child of parent node
     while (pos->parent)
     {
         if (pos->parent->left == pos)
@@ -86,26 +100,30 @@ node* find_location(tree* tree)
         else pos = pos->parent;
     }
 
+    // Move to left until a leaf node
     while (!pos->is_leaf && pos->left)
-    {
         pos = pos->left;
-    }
 
     return pos;
 }
 
+// Refresh the last node location
+// it is used after the removal work
 node* refresh_last_node(node* n, bool is_switched)
 {
     node* pos = n;
+
+    // Move up until the node is right child of parent node
     if (pos->parent && !is_switched)
     {
-        if (pos->parent->right == pos)
+        if (pos->parent->right == pos) // Switch the direction
             pos = refresh_last_node(pos->parent->left, true);
         else if (pos->parent->left == pos)
             pos = refresh_last_node(pos->parent, is_switched);
     }
     else
     {
+        // Move to right child until a leaf node
         if (pos->right && !pos->right->is_leaf)
             pos = refresh_last_node(pos->right, is_switched);
     }
@@ -113,12 +131,13 @@ node* refresh_last_node(node* n, bool is_switched)
     return pos;
 }
 
+// Insert an element to the heap
 void insert(tree** tr, const int data)
 {
     // Find location;
     node* location = find_location(*tr);
     // replace leaf node in the location to new node;
-    node* new_elem = new_node(data, false);
+    node* new_elem = creat_node(data, false);
     new_elem->parent = location->parent;
     if (location->parent && location->parent->left == location)
         location->parent->left = new_elem;
@@ -131,17 +150,18 @@ void insert(tree** tr, const int data)
     location = new_elem;
 
     // former leaf node to be left child of the new node and make right child leaf node.
-    location->right = new_node(0, true);
+    location->right = creat_node(0, true);
     location->right->parent = location;
 
     // refresh last_node;
     (*tr)->last_node = location;
-    
+
     // Calibrate the heap
     (*tr)->count++;
     up_heap(location);
 }
 
+// Remove an element from the heap
 int pop(tree** tr)
 {
     if (!(*tr)->count)
@@ -189,6 +209,7 @@ int pop(tree** tr)
     return rt;
 }
 
+// Deallocate all nodes in the heap
 void free_all_nodes(node* target)
 {
     if (target->left)
@@ -198,6 +219,7 @@ void free_all_nodes(node* target)
     free(target);
 }
 
+// Release all resources of the heap
 void free_all(tree* tr)
 {
     free_all_nodes(tr->root);
@@ -218,7 +240,7 @@ int main(void)
 
     insert(&tr, 541);
     printf("%d\n", pop(&tr));
-    
+
     free_all(tr);
     return 0;
 }

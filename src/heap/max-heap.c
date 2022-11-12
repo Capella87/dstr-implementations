@@ -8,6 +8,7 @@ typedef struct heap
     int max_capacity;
 } heap;
 
+// Swap two numbers
 inline void swap(int* a, int* b)
 {
     int temp = *a;
@@ -15,9 +16,12 @@ inline void swap(int* a, int* b)
     *b = temp;
 }
 
+// Initialize a heap
 heap* init_heap(int max_capacity)
 {
     heap* rt = (heap*)malloc(sizeof(heap));
+
+    // This heap does not use the first index of array
     rt->data = (int*)malloc(sizeof(int) * (max_capacity + 1));
 
     rt->index = 0;
@@ -26,11 +30,13 @@ heap* init_heap(int max_capacity)
     return rt;
 }
 
+// Up_heap or down_heap
 void heapify(heap* h, int idx, void (*direction)(heap*, int))
 {
     direction(h, idx);
 }
 
+// Move a node up until reaching a proper place from the bottom
 void up_heap(heap* h, int idx)
 {
     int parent = idx / 2;
@@ -42,6 +48,7 @@ void up_heap(heap* h, int idx)
     }
 }
 
+// Move a node down until reaching a proper place from the top
 void down_heap(heap* h, int idx)
 {
     int target = idx;
@@ -59,7 +66,7 @@ void down_heap(heap* h, int idx)
     }
 }
 
-
+// Insert an element to the heap
 void insert(heap* h, int data)
 {
     if (h->index == h->max_capacity) return;
@@ -68,6 +75,7 @@ void insert(heap* h, int data)
     heapify(h, h->index, up_heap);
 }
 
+// Get the max value from the heap
 int get_max(heap* h)
 {
     if (!h->index)
@@ -83,12 +91,15 @@ int get_max(heap* h)
     return rt;
 }
 
+// Deallocate all resources of heap
 void free_heap(heap* h)
 {
     free(h->data);
     free(h);
 }
 
+// Print all elements of heap
+// Heap does not always follow sorted order.
 void print_heap(heap* h)
 {
     for (int i = 1; i <= h->index; i++)
