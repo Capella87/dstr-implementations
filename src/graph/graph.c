@@ -16,7 +16,7 @@ typedef struct incidence
 {
     edge* edge;
     incidence* next;
-    int vert_key;
+    vertex* opposite;
 } incidence;
 
 // Vertex struct
@@ -155,12 +155,12 @@ void queue_free(queue* q)
 #endif
 
 // Create a new incidence to save the opposite vertex and edge information
-incidence* incidence_creat(edge* edg, int vert_key)
+incidence* incidence_creat(edge* edg, vertex* vert)
 {
     incidence* rt = (incidence*)malloc(sizeof(incidence));
     rt->edge = edg;
     rt->next = (void*)0;
-    rt->vert_key = vert_key;
+    rt->opposite = vert;
 
     return rt;
 }
@@ -174,14 +174,17 @@ void vertex_init(vertex** vert, int size)
         (*vert)[i].inbound_count = (*vert)[i].outbound_count = 0;
 
         // Create headers
-        (*vert)[i].inbound_header = incidence_creat((void*)0, 0);
-        (*vert)[i].outbound_header = incidence_creat((void*)0, 0);
+        (*vert)[i].inbound_header = incidence_creat((void*)0, (void*)0);
+        (*vert)[i].outbound_header = incidence_creat((void*)0, (void*)0);
         (*vert)[i].name = 0;
 #ifdef FIRSTSEARCH
         (*vert)[i].is_visited = false;
 #endif
-#ifdef TOPOSORT
-        (*vert)[i].degree = 0;
+
+#ifdef PRIM
+        (*vert)[i].distance = INT_MAX;
+        (*vert)[i].parent_edge = (void*)0;
+        (*vert)[i].heap_pos = (void*)0;
 #endif
     }
 }
@@ -227,7 +230,7 @@ incidence* incidence_find(incidence* header, incidence** prev, int vert_key)
     incidence* pre = n;
 
     // Move forward while the n is not null and the vert_key is not matching
-    while (n && n->vert_key != vert_key)
+    while (n && n->opposite->name != vert_key)
     {
         pre = n;
         n = n->next;
@@ -283,17 +286,17 @@ int edge_locate(edge* edg, int key, int edge_size, int weight)
     return idx;
 }
 
-// // Find a proper location and locate the new incidence node in the array
-void incidence_locate(incidence* header, edge* edge_target, int vert_key)
+// Find a proper location and locate the new incidence node in the array
+void incidence_locate(incidence* header, edge* edge_target, vertex* opposite)
 {
     incidence* node = header;
 
     // Move while node->next is not null and node->next->vert_key is smaller than the argument vert_key
-    while (node->next && node->next->vert_key < vert_key)
+    while (node->next && node->next->opposite->name < opposite->name)
         node = node->next;
 
     // Create a new incidence node
-    incidence* n = incidence_creat(edge_target, vert_key);
+    incidence* n = incidence_creat(edge_target, opposite);
 
     // Place the node
     n->next = node->next;
@@ -305,13 +308,13 @@ void incidence_insert(vertex* vert, edge* edg, int source_idx, int destination_i
     int edge_num)
 {
     // Insert a new incidence node in the outbound incidence list which is located in the source vertex
-    incidence_locate(vert[source_idx].outbound_header, &edg[edge_num], vert[destination_idx].name);
+    incidence_locate(vert[source_idx].outbound_header, &edg[edge_num], &vert[destination_idx]);
     vert[source_idx].outbound_count++;
 
 #ifdef UNDIGRAPH
     // If this implementation is not for a digraph, inbound incidence list in the source vertex must also contain the same information
     // But they are sharing the same edge
-    incidence_locate(vert[source_idx].inbound_header, &edg[edge_num], vert[destination_idx].name);
+    incidence_locate(vert[source_idx].inbound_header, &edg[edge_num], &vert[destination_idx]);
     vert[source_idx].inbound_count++;
 #endif
 
@@ -321,13 +324,13 @@ void incidence_insert(vertex* vert, edge* edg, int source_idx, int destination_i
 #endif
 
     // Insert a new incidence node in the inbound incidence list of the destination vertex
-    incidence_locate(vert[destination_idx].inbound_header, &edg[edge_num], vert[source_idx].name);
+    incidence_locate(vert[destination_idx].inbound_header, &edg[edge_num], &vert[source_idx]);
     vert[destination_idx].inbound_count++;
 
 #ifdef UNDIGRAPH
     // If this implementation is not for a digraph, outbound incidence list in the destination vertex must also have the same information
     // But they are sharing the same edge
-    incidence_locate(vert[destination_idx].outbound_header, &edg[edge_num], vert[source_idx].name);
+    incidence_locate(vert[destination_idx].outbound_header, &edg[edge_num], &vert[source_idx]);
     vert[destination_idx].outbound_count++;
 #endif
 
@@ -483,12 +486,12 @@ void topological_sort(vertex* vert, edge* edg, int vert_arr_size, int edge_arr_s
         incidence* inc = v->outbound_header->next;
         while (inc)
         {
-            // Find an opponent and decrement its degree
-            vertex* opponent = inc->edge->destination;
-            opponent->degree--;
+            // Find an opposite and decrement its degree
+            vertex* opposite = inc->edge->destination;
+            opposite->degree--;
             // If its degree is zero, enqueue
-            if (!opponent->degree)
-                queue_enqueue(q, opponent);
+            if (!opposite->degree)
+                queue_enqueue(q, opposite);
             inc = inc->next;
         }
     }
