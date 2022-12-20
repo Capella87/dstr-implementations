@@ -125,7 +125,7 @@ node* refresh_last_node(node* n, bool is_switched)
     {
         // Move to right child until a leaf node
         if (pos->right && !pos->right->is_leaf)
-            pos = refresh_last_node(pos->right, is_switched);
+            pos = refresh_last_node(pos->right, true);
     }
 
     return pos;
