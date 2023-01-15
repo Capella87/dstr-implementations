@@ -4,3 +4,10 @@ root = true
 charset = utf-8
 indent_size = 4
 indent_style = space
+insert_final_newline = false
+
+[*.md]
+insert_final_newline = true
+
+[*.py]
+insert_final_newline = true
