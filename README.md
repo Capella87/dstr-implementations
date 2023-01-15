@@ -1,7 +1,7 @@
 # Dstr-Implementations : A Collection of Data Structure Implementations
 
 ## What's This?
-It has data structure and some sorting implementations in several languages. Currently I wrote in C, C++, C# and Python. More languages such as Java, Go and more in future.
+It has data structure and some sorting implementations in several languages. Currently I wrote in several languages.
 
 ## Languages
 
@@ -12,12 +12,12 @@ It has data structure and some sorting implementations in several languages. Cur
 * Java
 * JavaScript
 * Python
-* Visual BASIC .NET (Auto conversion from C#)
 
 ### In Future
 * Go
 * Rust
 * TypeScript
+* Zig
 
 ## Contents
 
@@ -98,13 +98,13 @@ It has data structure and some sorting implementations in several languages. Cur
 
 ## Disclaimer
 
-Please Do NOT copy and submit source code in this repository directly to your assignment, practice session or exams. I don't have any responsibilities for any disadvantages after ignoring this disclaimer.
+Please Do NOT copy and submit source code in this repository directly to your assignment, practice session or exams. I do NOT have any responsibilities for any disadvantages after ignoring this disclaimer.
 
 ## Feedback
-Use Issue tracker in GitHub repository for any trouble or implementation requests.
+Use Issue tracker in GitHub repository for any problems or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Oct 18, 2022
+Created: Nov 6, 2021 | Last Modified: Jan 16, 2023
 
-Copyright © 2021-2022 Capella87. Licensed under MIT License.
+Copyright © 2021-2023 Capella87. Licensed under MIT License.
