@@ -2,7 +2,6 @@ root = true
 
 [*]
 charset = utf-8
-indent_size = 4
 indent_style = space
 insert_final_newline = false
 
@@ -11,3 +10,9 @@ insert_final_newline = true
 
 [*.py]
 insert_final_newline = true
+
+[*.{c,cpp,h,hpp,cs,java,py,go,rs,🔥,mojo,rkt,lua,zig}]
+indent_size = 4
+
+[*.{js,ts,tsx,jsx}]
+indent_size = 2
