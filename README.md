@@ -1,11 +1,19 @@
 # Dstr-Implementations : A Collection of Data Structure Implementations
 
+## Announcements
+
+After my consideration, I decided to change this repository name to algorithms. I will integrate algo-implementations to this repository soon by using branch merge. The main reason is that maintaining unified repository will much be easier. Also, this repository contains sorting algorithms, so I think it is better to change the name to algorithms and integrate.
+
+Fortunately, the smart GitHub Copilot suggested lots of algorithms and data structures that I've learned or implemented yet. I am strongly considering to implement those... Thank you GitHub Copilot!
+
 ## What's This?
+
 It has data structure and some sorting implementations in several languages. Currently I wrote in several languages.
 
 ## Languages
 
 ### Available
+
 * C
 * C++
 * C#
@@ -14,14 +22,18 @@ It has data structure and some sorting implementations in several languages. Cur
 * Python
 
 ### In Future
+
 * Go
 * Rust
 * TypeScript
 * Zig
+* Lua
+* Racket
 
 ## Contents
 
 ### Data Structure
+
 * Doubly Linked List
 * Disjoint Set
 * Heap (Array based; Max and min heap)
@@ -30,18 +42,21 @@ It has data structure and some sorting implementations in several languages. Cur
 * Queue (Linked List based)
 
 ### Graph
+
 * Breadth-First Search
 * Depth-First Search
 * Topological Sort
 * Undirected Graph
 
 ### Search
+
 * Binary Search
 * Binary Search - Lower Bound
 * Binary Search - Upper Bound
 * Interpolation Search
 
 ### Sorting
+
 * Bubble Sort
 * Cocktail Shaker Sort
 * Counting Sort
@@ -55,6 +70,7 @@ It has data structure and some sorting implementations in several languages. Cur
 * Tree Sort
 
 ### Tree
+
 * AVL Tree
 * Binary Search Tree (BST)
 * Binary Tree
@@ -62,6 +78,7 @@ It has data structure and some sorting implementations in several languages. Cur
 
 
 ## Upcoming Implementations
+
 * Stack (Array Based)
 * Deque (Linked List based)
 * Radix Sort
@@ -76,6 +93,7 @@ It has data structure and some sorting implementations in several languages. Cur
 * Dictionary
 
 ## In Plan
+
 * Block Merge Sort
 * Sleep Sort
 * Pancake Sort
@@ -100,11 +118,12 @@ It has data structure and some sorting implementations in several languages. Cur
 
 Please Do NOT copy and submit source code in this repository directly to your assignment, practice session or exams. I do NOT have any responsibilities for any disadvantages after ignoring this disclaimer.
 
-## Feedback
+## Feedbacks
+
 Use Issue tracker in GitHub repository for any problems or implementation requests.
 
 ---
 
-Created: Nov 6, 2021 | Last Modified: Jan 16, 2023
+Created: Nov 6, 2021 | Last Modified: Oct 10, 2023
 
 Copyright © 2021-2023 Capella87. Licensed under MIT License.
